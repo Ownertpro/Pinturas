@@ -25,7 +25,14 @@ import {
   ChevronRight,
   Share2,
   Linkedin,
-  ArrowUp
+  ArrowUp,
+  Star,
+  HelpCircle,
+  Award,
+  Users,
+  Quote,
+  ArrowLeft,
+  ArrowRight
 } from "lucide-react";
 import { useState, useRef } from "react";
 
@@ -113,7 +120,7 @@ export default function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-10">
-            {["Servicios", "Nosotros", "Procesos", "Contacto"].map((item) => (
+            {["Servicios", "Nosotros", "Procesos", "Testimonios", "FAQ", "Contacto"].map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
@@ -148,6 +155,8 @@ export default function App() {
               <a href="#servicios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Servicios</a>
               <a href="#nosotros" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Nosotros</a>
               <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Procesos</a>
+              <a href="#testimonios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Testimonios</a>
+              <a href="#faq" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">FAQ</a>
               <a href={whatsappLink} className="text-2xl font-serif italic text-emerald-400">WhatsApp</a>
               <a 
                 href="https://www.facebook.com/share/17eK6YPb9d/" 
@@ -188,25 +197,34 @@ export default function App() {
                     Especialistas en la aplicación técnica de recubrimientos de alta gama. 
                     Nuestra metodología garantiza una terminación hermética y una estética impecable.
                   </p>
-                  <div className="flex flex-col gap-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
-                        <Scan className="w-5 h-5 text-emerald-500" />
+                  <div className="flex flex-wrap gap-6 mt-12">
+                    <a 
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-emerald-500 text-black px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white transition-all hover:scale-105 active:scale-95"
+                    >
+                      Solicitar Presupuesto
+                    </a>
+                    <a 
+                      href="#servicios"
+                      className="glass-panel text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all"
+                    >
+                      Ver Servicios
+                    </a>
+                  </div>
+
+                  <div className="flex gap-12 mt-16 pt-12 border-t border-white/5">
+                    {[
+                      { val: "500+", label: "Proyectos" },
+                      { val: "15+", label: "Años" },
+                      { val: "100%", label: "Garantía" }
+                    ].map((stat, i) => (
+                      <div key={i}>
+                        <div className="text-3xl font-serif italic mb-1">{stat.val}</div>
+                        <div className="text-[8px] uppercase tracking-widest font-bold text-white/30">{stat.label}</div>
                       </div>
-                      <div>
-                        <div className="text-xs uppercase tracking-widest font-bold mb-1">Precisión</div>
-                        <div className="text-sm text-white/40">Planimetría láser en cada superficie.</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
-                        <ShieldCheck className="w-5 h-5 text-emerald-500" />
-                      </div>
-                      <div>
-                        <div className="text-xs uppercase tracking-widest font-bold mb-1">Protección</div>
-                        <div className="text-sm text-white/40">Sellado hermético contra humedad.</div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </motion.div>
@@ -395,6 +413,102 @@ export default function App() {
           </div>
         )}
 
+      {/* Before & After Section */}
+      <section className="py-32 relative overflow-hidden bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+            <div className="max-w-2xl">
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Resultados Reales</h2>
+              <h3 className="font-serif text-5xl lg:text-7xl leading-none tracking-tight">
+                EL PODER DE LA <br />
+                <span className="italic text-white/20">TRANSFORMACIÓN.</span>
+              </h3>
+            </div>
+            <p className="text-white/40 max-w-xs text-sm leading-relaxed">
+              Visualiza el impacto de nuestro estándar hermético en proyectos reales.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12">
+            {[
+              {
+                title: "Fachada Residencial",
+                before: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
+                after: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+                desc: "Restauración total con sellado hidrófugo y pintura de alta densidad."
+              },
+              {
+                title: "Interiores de Lujo",
+                before: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
+                after: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
+                desc: "Nivelación de muros con enduido plástico y acabado mate profundo."
+              }
+            ].map((project, i) => (
+              <div key={i} className="group relative">
+                <div className="aspect-video rounded-[3rem] overflow-hidden border border-white/10 relative">
+                  <div className="absolute inset-0 flex">
+                    <div className="w-1/2 h-full relative overflow-hidden border-r border-white/20">
+                      <img src={project.before} alt="Before" className="w-full h-full object-cover grayscale" />
+                      <div className="absolute top-6 left-6 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full text-[8px] uppercase tracking-widest font-bold">Antes</div>
+                    </div>
+                    <div className="w-1/2 h-full relative overflow-hidden">
+                      <img src={project.after} alt="After" className="w-full h-full object-cover" />
+                      <div className="absolute top-6 right-6 px-3 py-1 bg-emerald-500 rounded-full text-[8px] uppercase tracking-widest font-bold text-black">Después</div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                </div>
+                <div className="mt-8 px-4">
+                  <h4 className="text-2xl font-serif italic mb-2">{project.title}</h4>
+                  <p className="text-sm text-white/40 leading-relaxed">{project.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Area Section */}
+      <section className="py-32 relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="glass-panel p-12 md:p-24 rounded-[4rem] border-white/5 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+            
+            <div className="grid lg:grid-cols-2 gap-24 items-center relative z-10">
+              <div>
+                <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Cobertura</h2>
+                <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight">
+                  Llegamos a <br />
+                  <span className="italic text-white/30">TU ZONA.</span>
+                </h3>
+                <p className="text-white/50 text-lg leading-relaxed mb-12">
+                  Nuestra base operativa en Limpio nos permite una respuesta ágil en todo el departamento Central y alrededores.
+                </p>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  {["Limpio", "Asunción", "Luque", "Mariano R. Alonso", "Lambaré", "San Lorenzo", "Fernando de la Mora", "Villa Elisa"].map((city) => (
+                    <div key={city} className="flex items-center gap-3 text-sm text-white/40">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40" />
+                      {city}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="aspect-square rounded-full border border-white/10 p-8 flex items-center justify-center relative animate-spin-slow">
+                  <div className="absolute inset-0 border-2 border-dashed border-emerald-500/20 rounded-full" />
+                  <MapPin size={48} className="text-emerald-500" />
+                </div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
+                  <div className="w-3/4 h-3/4 bg-emerald-500/10 blur-[80px] rounded-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Us Section */}
       <section id="nosotros" className="py-32 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
@@ -549,48 +663,215 @@ export default function App() {
         </div>
       </section>
 
+      {/* Trust Badges Section */}
+      <section className="py-20 border-y border-white/5 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+            {[
+              { icon: <Award className="w-6 h-6" />, label: "Garantía Real", sub: "Respaldo total" },
+              { icon: <ShieldCheck className="w-6 h-6" />, label: "Materiales Pro", sub: "Marcas Premium" },
+              { icon: <Clock className="w-6 h-6" />, label: "Puntualidad", sub: "Plazos cumplidos" },
+              { icon: <Users className="w-6 h-6" />, label: "Atención 1 a 1", sub: "Asesoría directa" }
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 rounded-2xl glass-panel flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-emerald-500">
+                  {item.icon}
+                </div>
+                <div className="text-xs uppercase tracking-widest font-bold mb-2">{item.label}</div>
+                <div className="text-[10px] text-white/30 uppercase tracking-widest">{item.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonios" className="py-32 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Testimonios</h2>
+            <h3 className="font-serif text-5xl lg:text-7xl italic">Voces de Confianza.</h3>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                text: "Excelente trabajo, muy profesionales y limpios. El acabado hermético realmente se nota en la durabilidad.",
+                author: "Maria G.",
+                role: "Residencial"
+              },
+              {
+                text: "Fabián es un experto. Transformó mi fachada por completo con un texturado impecable. 100% recomendado.",
+                author: "Juan R.",
+                role: "Propietario"
+              },
+              {
+                text: "La atención al detalle es impresionante. No dejaron ni una gota fuera de lugar. Calidad superior.",
+                author: "Lucia M.",
+                role: "Arquitecta"
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="glass-panel p-10 rounded-[2.5rem] border-white/5 relative group hover:bg-white/[0.08] transition-all duration-500"
+              >
+                <Quote className="absolute top-8 right-8 w-12 h-12 text-emerald-500/10 group-hover:text-emerald-500/20 transition-colors" />
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={12} className="fill-emerald-500 text-emerald-500" />
+                  ))}
+                </div>
+                <p className="text-white/60 leading-relaxed italic mb-8 font-serif text-lg">
+                  "{item.text}"
+                </p>
+                <div>
+                  <div className="font-bold text-sm uppercase tracking-widest">{item.author}</div>
+                  <div className="text-[10px] text-white/30 uppercase tracking-widest mt-1">{item.role}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-32 bg-white/[0.02]">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Preguntas Frecuentes</h2>
+            <h3 className="font-serif text-5xl lg:text-6xl italic">Despeja tus Dudas.</h3>
+          </div>
+          
+          <div className="space-y-6">
+            {[
+              {
+                q: "¿Cuánto tiempo dura el proceso?",
+                a: "Depende del tamaño del proyecto, pero usualmente entre 3 a 5 días para una residencia estándar, garantizando los tiempos de secado técnico."
+              },
+              {
+                q: "¿Qué marcas de pintura utilizan?",
+                a: "Trabajamos exclusivamente con marcas premium nacionales e internacionales con alta carga de sólidos para asegurar la durabilidad hermética."
+              },
+              {
+                q: "¿Ofrecen garantía por el trabajo?",
+                a: "Sí, todos nuestros servicios cuentan con garantía escrita tanto en la aplicación técnica como en la calidad de los materiales utilizados."
+              },
+              {
+                q: "¿Llegan a todo el país?",
+                a: "Operamos principalmente en Central (Limpio, Asunción, Luque, etc.), pero realizamos proyectos de gran envergadura en todo el territorio nacional."
+              }
+            ].map((item, i) => (
+              <details key={i} className="group glass-panel rounded-3xl border-white/5 overflow-hidden">
+                <summary className="flex items-center justify-between p-8 cursor-pointer list-none">
+                  <span className="font-bold text-sm uppercase tracking-widest pr-8">{item.q}</span>
+                  <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-open:rotate-180 transition-transform">
+                    <ChevronRight size={16} />
+                  </div>
+                </summary>
+                <div className="px-8 pb-8 text-white/40 text-sm leading-relaxed border-t border-white/5 pt-6">
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action - Minimalist & Powerful */}
       <section id="contacto" className="py-48 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-serif text-[clamp(2rem,8vw,6rem)] leading-[0.9] tracking-tighter mb-16">
-              TRANSFORMA TU <br />
-              <span className="italic text-white/20">PATRIMONIO.</span>
-            </h2>
-            
-            <div className="flex flex-col items-center gap-12">
-              <a 
-                href={whatsappLink}
-                className="group relative inline-flex items-center justify-center"
-              >
-                <div className="absolute inset-0 bg-emerald-500 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity" />
-                <div className="relative bg-white text-black px-12 py-8 rounded-full flex items-center gap-6 hover:scale-105 transition-transform duration-500">
-                  <div className="flex flex-col items-start">
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-50">Consultoría Directa</span>
-                    <span className="text-2xl font-bold tracking-tight">{whatsappNumber}</span>
-                  </div>
-                  <div className="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform">
-                    <ArrowUpRight size={24} />
-                  </div>
-                </div>
-              </a>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-left"
+            >
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Contacto</h2>
+              <h3 className="font-serif text-5xl lg:text-8xl mb-12 leading-[0.9] tracking-tighter">
+                HABLEMOS DE TU <br />
+                <span className="italic text-white/20">PROYECTO.</span>
+              </h3>
+              <p className="text-white/40 text-lg leading-relaxed mb-12 max-w-md">
+                Estamos listos para asesorarte y brindarte un presupuesto detallado sin compromiso. 
+                Tu patrimonio merece el estándar hermético.
+              </p>
               
-              <div className="flex flex-wrap justify-center gap-12 text-white/30">
-                <div className="flex items-center gap-3">
-                  <MapPin size={16} className="text-emerald-500" />
-                  <span className="text-xs uppercase tracking-widest font-bold">Cobertura Nacional</span>
+              <div className="space-y-8">
+                <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-emerald-500">
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">WhatsApp Directo</div>
+                    <a href={whatsappLink} className="text-xl font-bold hover:text-emerald-500 transition-colors">{whatsappNumber}</a>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Clock size={16} className="text-emerald-500" />
-                  <span className="text-xs uppercase tracking-widest font-bold">Respuesta en 24h</span>
+                <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-emerald-500">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">Base Operativa</div>
+                    <div className="text-xl font-bold">Isla Aranda, Limpio</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="glass-panel p-10 md:p-16 rounded-[3rem] border-white/5"
+            >
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const name = formData.get('name');
+                  const service = formData.get('service');
+                  const message = `Hola! Soy ${name}, me interesa el servicio de ${service}.`;
+                  window.open(`https://wa.me/595984921554?text=${encodeURIComponent(message)}`, '_blank');
+                }}
+                className="space-y-8"
+              >
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Nombre Completo</label>
+                  <input 
+                    name="name"
+                    type="text" 
+                    required
+                    placeholder="Tu nombre..."
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Servicio de Interés</label>
+                  <select 
+                    name="service"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                  >
+                    {services.map(s => <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
+                    <option value="Otros" className="bg-[#0a0a0a]">Otros</option>
+                  </select>
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full bg-white text-black py-6 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-emerald-500 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Enviar a WhatsApp
+                </button>
+                <p className="text-[8px] text-center uppercase tracking-widest text-white/20">
+                  Te responderemos en menos de 24 horas hábiles.
+                </p>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -621,6 +902,8 @@ export default function App() {
                 <li><a href="#servicios" className="hover:text-emerald-500 transition-colors">Servicios</a></li>
                 <li><a href="#nosotros" className="hover:text-emerald-500 transition-colors">Nosotros</a></li>
                 <li><a href="#procesos" className="hover:text-emerald-500 transition-colors">Procesos</a></li>
+                <li><a href="#testimonios" className="hover:text-emerald-500 transition-colors">Testimonios</a></li>
+                <li><a href="#faq" className="hover:text-emerald-500 transition-colors">FAQ</a></li>
                 <li><a href="#contacto" className="hover:text-emerald-500 transition-colors">Contacto</a></li>
               </ul>
             </div>
