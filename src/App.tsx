@@ -32,33 +32,54 @@ const services = [
     title: "Pintura de Alta Gama",
     description: "Acabados de lujo para interiores y exteriores con pigmentos de máxima durabilidad.",
     icon: <Paintbrush className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
+    details: {
+      features: ["Pigmentos de alta resistencia UV", "Acabado lavable y antimanchas", "Resultados de calidad superior"],
+      process: ["Limpieza profunda de superficie", "Aplicación de imprimante sellador", "Doble capa de pintura premium"],
+      benefits: "Ideal para residencias que buscan un look sofisticado y una protección duradera contra el clima."
+    }
   },
   {
     id: "02",
     title: "Texturado & Enduido",
     description: "Preparación técnica de superficies para una planimetría perfecta y texturas artesanales.",
     icon: <Layers className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1562664377-709f2c337eb2?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1562664377-709f2c337eb2?auto=format&fit=crop&q=80&w=800",
+    details: {
+      features: ["Nivelación milimétrica", "Texturas personalizadas (Travertino, Rulato, etc.)", "Ocultamiento total de imperfecciones"],
+      process: ["Lijado mecánico de base", "Aplicación de enduido plástico", "Texturado artesanal con llana"],
+      benefits: "Transforma paredes irregulares en superficies de diseño con alta resistencia estructural."
+    }
   },
   {
     id: "03",
     title: "Impermeabilizado",
     description: "Sistemas de sellado hermético multicapa para protección total contra agentes climáticos.",
     icon: <Droplets className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800",
+    details: {
+      features: ["Membrana líquida de alta elasticidad", "Sellado de microfisuras", "Barrera 100% hidrófuga"],
+      process: ["Reparación de grietas existentes", "Aplicación de base adherente", "Triple capa cruzada de impermeabilizante"],
+      benefits: "Protección definitiva para techos y muros exteriores, evitando filtraciones y humedad interna."
+    }
   },
   {
     id: "04",
     title: "Resinas & Barnices",
     description: "Tratamientos de protección con resinas epóxicas y barnices de alto brillo o mate profundo.",
     icon: <Sparkles className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
+    details: {
+      features: ["Resistencia extrema a rayones", "Realce natural de vetas en madera", "Acabados espejo o mate profundo"],
+      process: ["Pulido fino de superficie", "Descontaminación total", "Aplicación controlada de resina/barniz"],
+      benefits: "Protección de lujo para pisos y maderas, garantizando una estética premium y fácil mantenimiento."
+    }
   }
 ];
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -124,6 +145,15 @@ export default function App() {
               <a href="#servicios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Servicios</a>
               <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Procesos</a>
               <a href={whatsappLink} className="text-2xl font-serif italic text-emerald-400">WhatsApp</a>
+              <a 
+                href="https://www.facebook.com/share/17eK6YPb9d/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)} 
+                className="text-2xl font-serif italic text-blue-400"
+              >
+                Facebook
+              </a>
             </div>
           </motion.div>
         )}
@@ -227,7 +257,8 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`group relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-500 ${
+                onClick={() => setSelectedService(service)}
+                className={`group relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-500 cursor-pointer ${
                   index === 0 || index === 3 ? "md:col-span-7" : "md:col-span-5"
                 }`}
               >
@@ -259,6 +290,90 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* Service Details Modal */}
+      {selectedService && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-6 py-12">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onClick={() => setSelectedService(null)}
+            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="relative w-full max-w-4xl glass-panel rounded-[3rem] overflow-hidden border-white/10"
+          >
+            <button 
+              onClick={() => setSelectedService(null)}
+              className="absolute top-8 right-8 w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-black transition-all z-10"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="grid lg:grid-cols-2">
+              <div className="aspect-square lg:aspect-auto relative overflow-hidden">
+                <img 
+                  src={selectedService.image} 
+                  alt={selectedService.title} 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                <div className="absolute bottom-12 left-12">
+                  <span className="font-mono text-xs text-emerald-500 mb-4 block">{selectedService.id}</span>
+                  <h3 className="text-5xl font-serif italic">{selectedService.title}</h3>
+                </div>
+              </div>
+
+              <div className="p-12 lg:p-16 max-h-[80vh] overflow-y-auto">
+                <div className="mb-12">
+                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500 mb-6">Descripción</h4>
+                  <p className="text-white/60 leading-relaxed italic font-serif text-xl">
+                    "{selectedService.details.benefits}"
+                  </p>
+                </div>
+
+                <div className="grid gap-12">
+                  <div>
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 mb-6">Características Clave</h4>
+                    <div className="space-y-4">
+                      {selectedService.details.features.map((feature, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <CheckCircle2 size={16} className="text-emerald-500 shrink-0" />
+                          <span className="text-sm text-white/80">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/30 mb-6">Proceso de Aplicación</h4>
+                    <div className="space-y-6">
+                      {selectedService.details.process.map((step, i) => (
+                        <div key={i} className="flex gap-4">
+                          <span className="font-mono text-xs text-emerald-500/40">{i + 1}</span>
+                          <span className="text-sm text-white/60 leading-relaxed">{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-16">
+                  <a 
+                    href={whatsappLink}
+                    className="inline-flex items-center gap-4 bg-emerald-500 text-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  >
+                    Consultar por este servicio
+                    <ArrowUpRight size={16} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
 
       {/* The "Hermetic" Philosophy - Technical Dashboard Style */}
       <section id="procesos" className="py-32 bg-white/5 border-y border-white/5 relative overflow-hidden">
@@ -401,10 +516,13 @@ export default function App() {
                 <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-black font-bold text-xs">PA</div>
                 <span className="font-serif text-xl tracking-tight font-medium">Pinturas & Acabados</span>
               </div>
-              <p className="text-white/30 text-sm leading-relaxed max-w-sm">
+              <p className="text-white/30 text-sm leading-relaxed max-w-sm mb-4">
                 Elevando el estándar de la pintura profesional a través de la técnica, 
                 la precisión y el compromiso con la durabilidad hermética.
               </p>
+              <div className="text-xs font-bold uppercase tracking-widest text-emerald-500/60">
+                Director: Fabián Paul Sanabria
+              </div>
             </div>
             
             <div>
@@ -422,7 +540,12 @@ export default function App() {
                 <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                   <Instagram size={18} />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                <a 
+                  href="https://www.facebook.com/share/17eK6YPb9d/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                >
                   <Facebook size={18} />
                 </a>
               </div>
@@ -431,7 +554,7 @@ export default function App() {
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-white/5">
             <div className="text-[10px] uppercase tracking-widest font-bold text-white/20">
-              © 2024 Pinturas & Acabados Profesionales
+              © 2024 Pinturas & Acabados Profesionales — Fabián Paul Sanabria
             </div>
             <div className="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-white/20">
               <a href="#" className="hover:text-white transition-colors">Privacidad</a>
