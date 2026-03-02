@@ -59,7 +59,7 @@ const services = [
     title: "Impermeabilizado",
     description: "Sistemas de sellado hermético multicapa para protección total contra agentes climáticos.",
     icon: <Droplets className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1635424710928-0544e8512eae?auto=format&fit=crop&q=80&w=800",
     details: {
       features: ["Membrana líquida de alta elasticidad", "Sellado de microfisuras", "Barrera 100% hidrófuga"],
       process: ["Reparación de grietas existentes", "Aplicación de base adherente", "Triple capa cruzada de impermeabilizante"],
@@ -71,7 +71,7 @@ const services = [
     title: "Resinas & Barnices",
     description: "Tratamientos de protección con resinas epóxicas y barnices de alto brillo o mate profundo.",
     icon: <Sparkles className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=800",
     details: {
       features: ["Resistencia extrema a rayones", "Realce natural de vetas en madera", "Acabados espejo o mate profundo"],
       process: ["Pulido fino de superficie", "Descontaminación total", "Aplicación controlada de resina/barniz"],
