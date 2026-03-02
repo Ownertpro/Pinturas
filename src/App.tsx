@@ -113,7 +113,7 @@ export default function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-10">
-            {["Servicios", "Procesos", "Contacto"].map((item) => (
+            {["Servicios", "Nosotros", "Procesos", "Contacto"].map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
@@ -146,6 +146,7 @@ export default function App() {
           >
             <div className="flex flex-col gap-6">
               <a href="#servicios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Servicios</a>
+              <a href="#nosotros" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Nosotros</a>
               <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Procesos</a>
               <a href={whatsappLink} className="text-2xl font-serif italic text-emerald-400">WhatsApp</a>
               <a 
@@ -306,36 +307,35 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="relative w-full max-w-4xl glass-panel rounded-[3rem] overflow-hidden border-white/10"
+            className="relative w-[95%] max-w-4xl max-h-[90vh] glass-panel rounded-[2rem] md:rounded-[3rem] overflow-hidden border-white/10 flex flex-col lg:flex-row"
           >
             <button 
               onClick={() => setSelectedService(null)}
-              className="absolute top-8 right-8 w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-black transition-all z-10"
+              className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-black transition-all z-20"
             >
               <X size={20} />
             </button>
 
-            <div className="grid lg:grid-cols-2">
-              <div className="aspect-square lg:aspect-auto relative overflow-hidden">
-                <img 
-                  src={selectedService.image} 
-                  alt={selectedService.title} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                <div className="absolute bottom-12 left-12">
-                  <span className="font-mono text-xs text-emerald-500 mb-4 block">{selectedService.id}</span>
-                  <h3 className="text-5xl font-serif italic">{selectedService.title}</h3>
-                </div>
+            <div className="w-full lg:w-1/2 h-48 md:h-64 lg:h-auto relative overflow-hidden shrink-0">
+              <img 
+                src={selectedService.image} 
+                alt={selectedService.title} 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
+                <span className="font-mono text-[10px] md:text-xs text-emerald-500 mb-2 md:mb-4 block">{selectedService.id}</span>
+                <h3 className="text-3xl md:text-5xl font-serif italic">{selectedService.title}</h3>
               </div>
+            </div>
 
-              <div className="p-12 lg:p-16 max-h-[80vh] overflow-y-auto">
-                <div className="mb-12">
-                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500 mb-6">Descripción</h4>
-                  <p className="text-white/60 leading-relaxed italic font-serif text-xl">
-                    "{selectedService.details.benefits}"
-                  </p>
-                </div>
+            <div className="w-full lg:w-1/2 p-8 md:p-12 lg:p-16 overflow-y-auto">
+              <div className="mb-12">
+                <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500 mb-6">Descripción</h4>
+                <p className="text-white/60 leading-relaxed italic font-serif text-lg md:text-xl">
+                  "{selectedService.details.benefits}"
+                </p>
+              </div>
 
                 <div className="grid gap-12">
                   <div>
@@ -391,10 +391,76 @@ export default function App() {
                   </button>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
+        )}
+
+      {/* About Us Section */}
+      <section id="nosotros" className="py-32 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Sobre Nosotros</h2>
+              <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight">
+                Raíces en <span className="italic text-white/30">Limpio.</span>
+              </h3>
+              <p className="text-white/50 text-lg leading-relaxed mb-12 max-w-xl">
+                Somos un equipo apasionado por la excelencia en acabados, operando desde el corazón de <strong>Isla Aranda, Limpio</strong>. 
+                Nuestra misión es elevar el estándar de la construcción en Paraguay a través de técnicas de sellado hermético y una estética impecable.
+              </p>
+              
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-6 glass-panel p-6 rounded-3xl border-white/5">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">Ubicación Central</div>
+                    <div className="text-sm font-medium">Isla Aranda, Limpio — Paraguay</div>
+                  </div>
+                </div>
+                
+                <a 
+                  href="https://www.google.com/maps/search/Isla+Aranda,+Limpio" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-4 text-emerald-500 text-xs uppercase tracking-[0.3em] font-bold hover:gap-6 transition-all"
+                >
+                  Ver en Google Maps
+                  <ArrowUpRight size={16} />
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border border-white/10 relative">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.5!2d-57.4!3d-25.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDEyJzAwLjAiUyA1N8KwMjQnMDAuMCJX!5e0!3m2!1ses!2spy!4v1700000000000!5m2!1ses!2spy"
+                  className="absolute inset-0 w-full h-full grayscale invert opacity-50 contrast-125 group-hover:opacity-80 transition-opacity"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-transparent" />
+              </div>
+              <div className="absolute -bottom-8 -left-8 glass-panel p-8 rounded-3xl border-emerald-500/20 z-10">
+                <div className="text-4xl font-serif italic mb-2">100%</div>
+                <div className="text-[10px] uppercase tracking-widest font-bold text-emerald-500">Compromiso Local</div>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      )}
+      </section>
 
       {/* The "Hermetic" Philosophy - Technical Dashboard Style */}
       <section id="procesos" className="py-32 bg-white/5 border-y border-white/5 relative overflow-hidden">
@@ -541,8 +607,11 @@ export default function App() {
                 Elevando el estándar de la pintura profesional a través de la técnica, 
                 la precisión y el compromiso con la durabilidad hermética.
               </p>
-              <div className="text-xs font-bold uppercase tracking-widest text-emerald-500/60">
+              <div className="text-xs font-bold uppercase tracking-widest text-emerald-500/60 mb-2">
                 Director: Fabián Paul Sanabria
+              </div>
+              <div className="text-[10px] uppercase tracking-widest text-white/20">
+                Isla Aranda, Limpio — Paraguay
               </div>
             </div>
             
@@ -550,6 +619,7 @@ export default function App() {
               <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/50 mb-8">Navegación</h5>
               <ul className="space-y-4 text-sm font-medium">
                 <li><a href="#servicios" className="hover:text-emerald-500 transition-colors">Servicios</a></li>
+                <li><a href="#nosotros" className="hover:text-emerald-500 transition-colors">Nosotros</a></li>
                 <li><a href="#procesos" className="hover:text-emerald-500 transition-colors">Procesos</a></li>
                 <li><a href="#contacto" className="hover:text-emerald-500 transition-colors">Contacto</a></li>
               </ul>
