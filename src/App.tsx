@@ -34,7 +34,7 @@ import {
   ArrowLeft,
   ArrowRight
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const services = [
   {
@@ -91,17 +91,78 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  const { scrollYProgress } = useScroll();
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [notification, setNotification] = useState<{ city: string, time: string } | null>(null);
+
+  useEffect(() => {
+    const cities = ["Limpio", "Asunción", "Luque", "Mariano R. Alonso", "San Lorenzo", "Lambaré"];
+    const showNotification = () => {
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      setNotification({ city, time: "hace 2 min" });
+      setTimeout(() => setNotification(null), 5000);
+    };
+
+    const interval = setInterval(() => {
+      if (Math.random() > 0.7) showNotification();
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      setCursorPos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, []);
 
   const whatsappNumber = "0984921554";
   const whatsappLink = `https://wa.me/595984921554`;
 
   return (
-    <div ref={containerRef} className="relative bg-[#0a0a0a] text-white selection:bg-emerald-500/30">
+    <div ref={containerRef} className="relative bg-[#0a0a0a] text-white selection:bg-emerald-500/30 cursor-none">
+      {/* Custom Cursor */}
+      <motion.div 
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-emerald-500/50 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
+        animate={{ 
+          x: cursorPos.x - 16, 
+          y: cursorPos.y - 16,
+          scale: isHovering ? 2 : 1,
+          backgroundColor: isHovering ? "rgba(16, 185, 129, 0.1)" : "transparent"
+        }}
+        transition={{ type: "spring", damping: 20, stiffness: 250, mass: 0.5 }}
+      >
+        <div className="w-1 h-1 bg-emerald-500 rounded-full" />
+      </motion.div>
+
+      {/* Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-emerald-500 origin-left z-[100]"
+        style={{ scaleX }}
+      />
+
       <div className="fixed inset-0 noise-bg pointer-events-none z-50" />
+      
+      {/* Live Notification Toast */}
+      <motion.div 
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: notification ? 24 : -400, opacity: notification ? 1 : 0 }}
+        className="fixed bottom-32 left-0 z-[110] hidden md:block"
+      >
+        <div className="glass-panel p-4 rounded-2xl border-emerald-500/20 flex items-center gap-4 shadow-2xl">
+          <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+            <Users size={20} />
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-widest font-bold text-white/40">Solicitud Reciente</div>
+            <div className="text-xs font-bold">Alguien en <span className="text-emerald-500">{notification?.city}</span> pidió un presupuesto</div>
+          </div>
+        </div>
+      </motion.div>
       
       {/* Immersive Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -124,6 +185,8 @@ export default function App() {
               <a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
                 className="text-xs uppercase tracking-[0.2em] font-semibold text-white/50 hover:text-white transition-colors"
               >
                 {item}
@@ -133,6 +196,8 @@ export default function App() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
               className="bg-white text-black px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-emerald-400 transition-colors"
             >
               Presupuesto
@@ -197,31 +262,44 @@ export default function App() {
                     Especialistas en la aplicación técnica de recubrimientos de alta gama. 
                     Nuestra metodología garantiza una terminación hermética y una estética impecable.
                   </p>
-                  <div className="flex flex-wrap gap-6 mt-12">
-                    <a 
-                      href={whatsappLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-emerald-500 text-black px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white transition-all hover:scale-105 active:scale-95"
-                    >
-                      Solicitar Presupuesto
-                    </a>
-                    <a 
-                      href="#servicios"
-                      className="glass-panel text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all"
-                    >
-                      Ver Servicios
-                    </a>
-                  </div>
+                <div className="flex flex-wrap gap-6 mt-12">
+                  <a 
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    className="bg-emerald-500 text-black px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white transition-all hover:scale-105 active:scale-95"
+                  >
+                    Solicitar Presupuesto
+                  </a>
+                  <a 
+                    href="#servicios"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    className="glass-panel text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all"
+                  >
+                    Ver Servicios
+                  </a>
+                </div>
 
                   <div className="flex gap-12 mt-16 pt-12 border-t border-white/5">
                     {[
-                      { val: "500+", label: "Proyectos" },
-                      { val: "15+", label: "Años" },
-                      { val: "100%", label: "Garantía" }
+                      { val: "524", label: "Proyectos", isCounter: true },
+                      { val: "15+", label: "Años", isCounter: false },
+                      { val: "100%", label: "Garantía", isCounter: false }
                     ].map((stat, i) => (
                       <div key={i}>
-                        <div className="text-3xl font-serif italic mb-1">{stat.val}</div>
+                        <div className="text-3xl font-serif italic mb-1">
+                          {stat.isCounter ? (
+                            <motion.span
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                            >
+                              524
+                            </motion.span>
+                          ) : stat.val}
+                        </div>
                         <div className="text-[8px] uppercase tracking-widest font-bold text-white/30">{stat.label}</div>
                       </div>
                     ))}
@@ -237,13 +315,25 @@ export default function App() {
                 transition={{ duration: 1, delay: 0.2 }}
                 className="relative group"
               >
-                <div className="aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/10">
+                <div className="aspect-[3/4] rounded-[2rem] overflow-hidden border border-white/10 relative">
                   <img 
                     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" 
                     alt="Luxury Interior"
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                     referrerPolicy="no-referrer"
                   />
+                  
+                  {/* Technical HUD Overlay */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-8 right-8 text-right">
+                      <div className="text-[8px] font-mono text-emerald-500 uppercase tracking-widest mb-1">Surface Analysis</div>
+                      <div className="text-xs font-mono text-white/40">99.8% Purity</div>
+                    </div>
+                    <div className="absolute bottom-8 right-8">
+                      <div className="w-12 h-12 border-r border-b border-emerald-500/30" />
+                    </div>
+                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-emerald-500/10 animate-scan" />
+                  </div>
                 </div>
                 <div className="absolute -bottom-10 -left-10 w-48 h-48 glass-panel rounded-full flex flex-col items-center justify-center text-center p-6 animate-float">
                   <div className="text-4xl font-serif italic mb-1">15+</div>
@@ -280,6 +370,8 @@ export default function App() {
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
                 onClick={() => setSelectedService(service)}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
                 className={`group relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-500 cursor-pointer ${
                   index === 0 || index === 3 ? "md:col-span-7" : "md:col-span-5"
                 }`}
@@ -298,7 +390,11 @@ export default function App() {
                     </p>
                   </div>
                   
-                  <div className="mt-12 flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-white/20 group-hover:text-emerald-500 transition-colors">
+                  <div 
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    className="mt-12 flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-white/20 group-hover:text-emerald-500 transition-colors"
+                  >
                     Explorar Detalle <ChevronRight size={12} />
                   </div>
                 </div>
@@ -329,6 +425,8 @@ export default function App() {
           >
             <button 
               onClick={() => setSelectedService(null)}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
               className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 rounded-full glass-panel flex items-center justify-center hover:bg-white hover:text-black transition-all z-20"
             >
               <X size={20} />
@@ -384,6 +482,8 @@ export default function App() {
                 <div className="mt-16 flex flex-wrap gap-4">
                   <a 
                     href={whatsappLink}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
                     className="inline-flex items-center gap-4 bg-emerald-500 text-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white transition-colors"
                   >
                     Consultar por este servicio
@@ -402,6 +502,8 @@ export default function App() {
                         alert("Enlace copiado al portapapeles");
                       }
                     }}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
                     className="inline-flex items-center gap-4 glass-panel text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all"
                   >
                     Compartir
@@ -412,6 +514,58 @@ export default function App() {
             </motion.div>
           </div>
         )}
+
+      {/* Technical Breakdown Section */}
+      <section className="py-32 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="relative">
+                <div className="aspect-square glass-panel rounded-[4rem] border-white/5 p-12 flex flex-col justify-center gap-8">
+                  {[
+                    { layer: "03", title: "Capa de Sellado Hermético", desc: "Barrera hidrófuga que impide el paso del agua pero permite la transpiración.", color: "bg-emerald-500" },
+                    { layer: "02", title: "Base de Nivelación", desc: "Enduido plástico de alta densidad para una planimetría perfecta.", color: "bg-white/20" },
+                    { layer: "01", title: "Imprimación Técnica", desc: "Puente de adherencia que consolida el sustrato original.", color: "bg-white/10" }
+                  ].map((layer, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.2 }}
+                      className="flex gap-6 group"
+                    >
+                      <div className={`w-12 h-12 rounded-xl ${layer.color} flex items-center justify-center font-mono text-xs text-black font-bold shrink-0`}>
+                        {layer.layer}
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold mb-1 group-hover:text-emerald-500 transition-colors">{layer.title}</h4>
+                        <p className="text-xs text-white/40 leading-relaxed">{layer.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                {/* Decorative Elements */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 border border-emerald-500/10 rounded-full animate-spin-slow" />
+              </div>
+            </div>
+            
+            <div className="order-1 lg:order-2">
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Ingeniería de Acabado</h2>
+              <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight">
+                CAPAS DE <br />
+                <span className="italic text-white/30">PERFECCIÓN.</span>
+              </h3>
+              <p className="text-white/50 text-lg leading-relaxed mb-12">
+                No solo pintamos; construimos una armadura estética para tu hogar. Cada capa cumple una función técnica específica para garantizar la durabilidad hermética.
+              </p>
+              <div className="flex items-center gap-4 p-6 glass-panel rounded-3xl border-emerald-500/20">
+                <ShieldCheck className="text-emerald-500 w-8 h-8" />
+                <div className="text-sm font-medium">Garantía de integridad estructural por 5 años.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Before & After Section */}
       <section className="py-32 relative overflow-hidden bg-white/[0.01]">
@@ -445,7 +599,7 @@ export default function App() {
               }
             ].map((project, i) => (
               <div key={i} className="group relative">
-                <div className="aspect-video rounded-[3rem] overflow-hidden border border-white/10 relative">
+                <div className="aspect-video rounded-[3rem] overflow-hidden border border-white/10 relative group/ba">
                   <div className="absolute inset-0 flex">
                     <div className="w-1/2 h-full relative overflow-hidden border-r border-white/20">
                       <img src={project.before} alt="Before" className="w-full h-full object-cover grayscale" />
@@ -457,6 +611,15 @@ export default function App() {
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                  
+                  {/* Technical HUD Overlay */}
+                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover/ba:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 border-[20px] border-emerald-500/5" />
+                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-emerald-500/20 animate-scan" />
+                    <div className="absolute bottom-12 left-12 font-mono text-[8px] text-emerald-500 uppercase tracking-widest">
+                      Delta Analysis: +42% Durability
+                    </div>
+                  </div>
                 </div>
                 <div className="mt-8 px-4">
                   <h4 className="text-2xl font-serif italic mb-2">{project.title}</h4>
@@ -487,7 +650,12 @@ export default function App() {
                 
                 <div className="grid grid-cols-2 gap-4">
                   {["Limpio", "Asunción", "Luque", "Mariano R. Alonso", "Lambaré", "San Lorenzo", "Fernando de la Mora", "Villa Elisa"].map((city) => (
-                    <div key={city} className="flex items-center gap-3 text-sm text-white/40">
+                    <div 
+                      key={city} 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="flex items-center gap-3 text-sm text-white/40 hover:text-emerald-500 transition-colors cursor-default"
+                    >
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40" />
                       {city}
                     </div>
@@ -766,7 +934,11 @@ export default function App() {
               }
             ].map((item, i) => (
               <details key={i} className="group glass-panel rounded-3xl border-white/5 overflow-hidden">
-                <summary className="flex items-center justify-between p-8 cursor-pointer list-none">
+                <summary 
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="flex items-center justify-between p-8 cursor-pointer list-none"
+                >
                   <span className="font-bold text-sm uppercase tracking-widest pr-8">{item.q}</span>
                   <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-open:rotate-180 transition-transform">
                     <ChevronRight size={16} />
@@ -867,6 +1039,8 @@ Espero su respuesta, gracias!`;
                       name="name"
                       type="text" 
                       required
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
                       placeholder="Tu nombre..."
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors"
                     />
@@ -875,6 +1049,8 @@ Espero su respuesta, gracias!`;
                     <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Servicio</label>
                     <select 
                       name="service"
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
                     >
                       {services.map(s => <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
@@ -886,7 +1062,12 @@ Espero su respuesta, gracias!`;
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tipo de Obra</label>
-                    <select name="type" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none">
+                    <select 
+                      name="type" 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
                       <option value="Residencial" className="bg-[#0a0a0a]">Residencial</option>
                       <option value="Comercial" className="bg-[#0a0a0a]">Comercial</option>
                       <option value="Industrial" className="bg-[#0a0a0a]">Industrial</option>
@@ -894,7 +1075,12 @@ Espero su respuesta, gracias!`;
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Urgencia</label>
-                    <select name="urgency" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none">
+                    <select 
+                      name="urgency" 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
                       <option value="Inmediata" className="bg-[#0a0a0a]">Inmediata</option>
                       <option value="15 días" className="bg-[#0a0a0a]">15 días</option>
                       <option value="1 mes+" className="bg-[#0a0a0a]">1 mes+</option>
@@ -902,7 +1088,12 @@ Espero su respuesta, gracias!`;
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tamaño</label>
-                    <select name="size" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none">
+                    <select 
+                      name="size" 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
                       <option value="Pequeño (< 50m²)" className="bg-[#0a0a0a]">Pequeño</option>
                       <option value="Mediano (50-150m²)" className="bg-[#0a0a0a]">Mediano</option>
                       <option value="Grande (> 150m²)" className="bg-[#0a0a0a]">Grande</option>
@@ -912,6 +1103,8 @@ Espero su respuesta, gracias!`;
 
                 <button 
                   type="submit"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
                   className="w-full bg-white text-black py-6 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-emerald-500 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Enviar a WhatsApp
@@ -921,6 +1114,36 @@ Espero su respuesta, gracias!`;
           </div>
         </div>
       </section>
+
+      {/* Technical Stats Bar */}
+      <div className="bg-emerald-500 py-3 overflow-hidden whitespace-nowrap border-y border-black/10">
+        <motion.div 
+          animate={{ x: [0, -1000] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex gap-24 items-center"
+        >
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="flex gap-12 items-center text-black font-mono text-[10px] font-bold uppercase tracking-widest">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                Humedad Ideal: 45-65%
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                Temp. Aplicación: 18-28°C
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                Secado Técnico: 24h
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                Adherencia: 99.9%
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
 
       {/* Footer - Architectural Style */}
       <footer className="py-24 border-t border-white/5">
@@ -945,14 +1168,14 @@ Espero su respuesta, gracias!`;
             
             <div>
               <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/50 mb-8">Navegación</h5>
-              <ul className="space-y-4 text-sm font-medium">
-                <li><a href="#servicios" className="hover:text-emerald-500 transition-colors">Servicios</a></li>
-                <li><a href="#nosotros" className="hover:text-emerald-500 transition-colors">Nosotros</a></li>
-                <li><a href="#procesos" className="hover:text-emerald-500 transition-colors">Procesos</a></li>
-                <li><a href="#testimonios" className="hover:text-emerald-500 transition-colors">Testimonios</a></li>
-                <li><a href="#faq" className="hover:text-emerald-500 transition-colors">FAQ</a></li>
-                <li><a href="#contacto" className="hover:text-emerald-500 transition-colors">Contacto</a></li>
-              </ul>
+            <ul className="space-y-4 text-sm font-medium">
+              <li><a href="#servicios" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="hover:text-emerald-500 transition-colors">Servicios</a></li>
+              <li><a href="#nosotros" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="hover:text-emerald-500 transition-colors">Nosotros</a></li>
+              <li><a href="#procesos" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="hover:text-emerald-500 transition-colors">Procesos</a></li>
+              <li><a href="#testimonios" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="hover:text-emerald-500 transition-colors">Testimonios</a></li>
+              <li><a href="#faq" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="hover:text-emerald-500 transition-colors">FAQ</a></li>
+              <li><a href="#contacto" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="hover:text-emerald-500 transition-colors">Contacto</a></li>
+            </ul>
             </div>
 
             <div>
@@ -962,14 +1185,26 @@ Espero su respuesta, gracias!`;
                   href="https://www.facebook.com/share/17eK6YPb9d/" 
                   target="_blank"
                   rel="noopener noreferrer"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
                   className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all"
                 >
                   <Facebook size={18} />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                <a 
+                  href="#" 
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                >
                   <Instagram size={18} />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                <a 
+                  href="#" 
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+                >
                   <Linkedin size={18} />
                 </a>
               </div>
@@ -993,6 +1228,8 @@ Espero su respuesta, gracias!`;
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
         initial={{ opacity: 0, scale: 0.5, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         whileHover={{ scale: 1.1 }}
