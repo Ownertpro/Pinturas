@@ -242,8 +242,8 @@ export default function App() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1595844730298-b960ff98fee0?auto=format&fit=crop&q=80&w=1920" 
-            alt="Fondo de Pintura Profesional" 
+            src="https://images.unsplash.com/photo-1621905252507-b354bcadcabc?auto=format&fit=crop&q=80&w=1920" 
+            alt="Fondo de Pintura y Enduido Profesional" 
             className="w-full h-full object-cover opacity-20 grayscale"
             referrerPolicy="no-referrer"
           />
