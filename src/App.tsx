@@ -239,7 +239,18 @@ export default function App() {
 
       {/* Hero Section - Editorial Style */}
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 w-full">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1595844730298-b960ff98fee0?auto=format&fit=crop&q=80&w=1920" 
+            alt="Fondo de Pintura Profesional" 
+            className="w-full h-full object-cover opacity-20 grayscale"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-8">
               <motion.div
