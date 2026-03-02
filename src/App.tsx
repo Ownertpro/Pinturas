@@ -181,10 +181,10 @@ export default function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-10">
-            {["Servicios", "Nosotros", "Procesos", "Testimonios", "FAQ", "Contacto"].map((item) => (
+            {["Servicios", "Nosotros", "Procesos", "Testimonios", "FAQ", "Presupuesto"].map((item) => (
               <a 
                 key={item}
-                href={`#${item.toLowerCase()}`} 
+                href={`#${item.toLowerCase() === 'presupuesto' ? 'contacto' : item.toLowerCase()}`} 
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 className="text-xs uppercase tracking-[0.2em] font-semibold text-white/50 hover:text-white transition-colors"
@@ -192,16 +192,6 @@ export default function App() {
                 {item}
               </a>
             ))}
-            <a 
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              className="bg-white text-black px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-emerald-400 transition-colors"
-            >
-              Presupuesto
-            </a>
           </div>
 
           <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -222,6 +212,7 @@ export default function App() {
               <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Procesos</a>
               <a href="#testimonios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Testimonios</a>
               <a href="#faq" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">FAQ</a>
+              <a href="#contacto" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic text-emerald-500">Presupuesto</a>
               <a href={whatsappLink} className="text-2xl font-serif italic text-emerald-400">WhatsApp</a>
               <a 
                 href="https://www.facebook.com/share/17eK6YPb9d/" 
@@ -352,6 +343,168 @@ export default function App() {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action - Minimalist & Powerful (Moved Up) */}
+      <section id="contacto" className="py-32 relative overflow-hidden bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-left"
+            >
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Presupuesto</h2>
+              <h3 className="font-serif text-[clamp(2.5rem,8vw,6rem)] mb-12 leading-[0.9] tracking-tighter">
+                HABLEMOS DE TU <br />
+                <span className="italic text-white/20">PROYECTO.</span>
+              </h3>
+              <p className="text-white/40 text-lg leading-relaxed mb-12 max-w-md">
+                Estamos listos para asesorarte y brindarte un presupuesto detallado sin compromiso. 
+                Tu patrimonio merece el estándar hermético.
+              </p>
+              
+              <div className="space-y-8">
+                <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-emerald-500">
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">WhatsApp Directo</div>
+                    <a href={whatsappLink} className="text-xl font-bold hover:text-emerald-500 transition-colors">{whatsappNumber}</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-emerald-500">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">Base Operativa</div>
+                    <div className="text-xl font-bold">Isla Aranda, Limpio</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="glass-panel p-10 md:p-16 rounded-[3rem] border-white/5"
+            >
+              <div className="mb-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500">
+                    Respuesta en menos de 24h hábiles
+                  </span>
+                </div>
+                <h4 className="text-2xl font-serif italic">Solicita tu Presupuesto</h4>
+              </div>
+
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const name = formData.get('name');
+                  const service = formData.get('service');
+                  const type = formData.get('type');
+                  const urgency = formData.get('urgency');
+                  const size = formData.get('size');
+                  
+                  const message = `Hola! Mi nombre es ${name}.
+Me interesa el servicio de: ${service}.
+Tipo de obra: ${type}.
+Urgencia: ${urgency}.
+Tamaño estimado: ${size}.
+Espero su respuesta, gracias!`;
+                  
+                  window.open(`https://wa.me/595984921554?text=${encodeURIComponent(message)}`, '_blank');
+                }}
+                className="space-y-6"
+              >
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Nombre Completo</label>
+                    <input 
+                      name="name"
+                      type="text" 
+                      required
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      placeholder="Tu nombre..."
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Servicio</label>
+                    <select 
+                      name="service"
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
+                      {services.map(s => <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
+                      <option value="Otros" className="bg-[#0a0a0a]">Otros</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tipo de Obra</label>
+                    <select 
+                      name="type" 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
+                      <option value="Residencial" className="bg-[#0a0a0a]">Residencial</option>
+                      <option value="Comercial" className="bg-[#0a0a0a]">Comercial</option>
+                      <option value="Industrial" className="bg-[#0a0a0a]">Industrial</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Urgencia</label>
+                    <select 
+                      name="urgency" 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
+                      <option value="Inmediata" className="bg-[#0a0a0a]">Inmediata</option>
+                      <option value="15 días" className="bg-[#0a0a0a]">15 días</option>
+                      <option value="1 mes+" className="bg-[#0a0a0a]">1 mes+</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tamaño</label>
+                    <select 
+                      name="size" 
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
+                      <option value="Pequeño (< 50m²)" className="bg-[#0a0a0a]">Pequeño</option>
+                      <option value="Mediano (50-150m²)" className="bg-[#0a0a0a]">Mediano</option>
+                      <option value="Grande (> 150m²)" className="bg-[#0a0a0a]">Grande</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button 
+                  type="submit"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="w-full bg-white text-black py-6 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-emerald-500 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Enviar a WhatsApp
+                </button>
+              </form>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -955,168 +1108,6 @@ export default function App() {
                 </div>
               </details>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action - Minimalist & Powerful */}
-      <section id="contacto" className="py-48 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-left"
-            >
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Contacto</h2>
-              <h3 className="font-serif text-[clamp(2.5rem,8vw,6rem)] mb-12 leading-[0.9] tracking-tighter">
-                HABLEMOS DE TU <br />
-                <span className="italic text-white/20">PROYECTO.</span>
-              </h3>
-              <p className="text-white/40 text-lg leading-relaxed mb-12 max-w-md">
-                Estamos listos para asesorarte y brindarte un presupuesto detallado sin compromiso. 
-                Tu patrimonio merece el estándar hermético.
-              </p>
-              
-              <div className="space-y-8">
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-emerald-500">
-                    <Phone size={20} />
-                  </div>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">WhatsApp Directo</div>
-                    <a href={whatsappLink} className="text-xl font-bold hover:text-emerald-500 transition-colors">{whatsappNumber}</a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-emerald-500">
-                    <MapPin size={20} />
-                  </div>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-1">Base Operativa</div>
-                    <div className="text-xl font-bold">Isla Aranda, Limpio</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-10 md:p-16 rounded-[3rem] border-white/5"
-            >
-              <div className="mb-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500">
-                    Respuesta en menos de 24h hábiles
-                  </span>
-                </div>
-                <h4 className="text-2xl font-serif italic">Solicita tu Presupuesto</h4>
-              </div>
-
-              <form 
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const formData = new FormData(e.currentTarget);
-                  const name = formData.get('name');
-                  const service = formData.get('service');
-                  const type = formData.get('type');
-                  const urgency = formData.get('urgency');
-                  const size = formData.get('size');
-                  
-                  const message = `Hola! Mi nombre es ${name}.
-Me interesa el servicio de: ${service}.
-Tipo de obra: ${type}.
-Urgencia: ${urgency}.
-Tamaño estimado: ${size}.
-Espero su respuesta, gracias!`;
-                  
-                  window.open(`https://wa.me/595984921554?text=${encodeURIComponent(message)}`, '_blank');
-                }}
-                className="space-y-6"
-              >
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Nombre Completo</label>
-                    <input 
-                      name="name"
-                      type="text" 
-                      required
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      placeholder="Tu nombre..."
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Servicio</label>
-                    <select 
-                      name="service"
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
-                    >
-                      {services.map(s => <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
-                      <option value="Otros" className="bg-[#0a0a0a]">Otros</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tipo de Obra</label>
-                    <select 
-                      name="type" 
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
-                    >
-                      <option value="Residencial" className="bg-[#0a0a0a]">Residencial</option>
-                      <option value="Comercial" className="bg-[#0a0a0a]">Comercial</option>
-                      <option value="Industrial" className="bg-[#0a0a0a]">Industrial</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Urgencia</label>
-                    <select 
-                      name="urgency" 
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
-                    >
-                      <option value="Inmediata" className="bg-[#0a0a0a]">Inmediata</option>
-                      <option value="15 días" className="bg-[#0a0a0a]">15 días</option>
-                      <option value="1 mes+" className="bg-[#0a0a0a]">1 mes+</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tamaño</label>
-                    <select 
-                      name="size" 
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
-                    >
-                      <option value="Pequeño (< 50m²)" className="bg-[#0a0a0a]">Pequeño</option>
-                      <option value="Mediano (50-150m²)" className="bg-[#0a0a0a]">Mediano</option>
-                      <option value="Grande (> 150m²)" className="bg-[#0a0a0a]">Grande</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button 
-                  type="submit"
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                  className="w-full bg-white text-black py-6 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-emerald-500 transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  Enviar a WhatsApp
-                </button>
-              </form>
-            </motion.div>
           </div>
         </div>
       </section>
