@@ -829,46 +829,93 @@ export default function App() {
               viewport={{ once: true }}
               className="glass-panel p-10 md:p-16 rounded-[3rem] border-white/5"
             >
+              <div className="mb-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500">
+                    Respuesta en menos de 24h hábiles
+                  </span>
+                </div>
+                <h4 className="text-2xl font-serif italic">Solicita tu Presupuesto</h4>
+              </div>
+
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();
                   const formData = new FormData(e.currentTarget);
                   const name = formData.get('name');
                   const service = formData.get('service');
-                  const message = `Hola! Soy ${name}, me interesa el servicio de ${service}.`;
+                  const type = formData.get('type');
+                  const urgency = formData.get('urgency');
+                  const size = formData.get('size');
+                  
+                  const message = `Hola! Mi nombre es ${name}.
+Me interesa el servicio de: ${service}.
+Tipo de obra: ${type}.
+Urgencia: ${urgency}.
+Tamaño estimado: ${size}.
+Espero su respuesta, gracias!`;
+                  
                   window.open(`https://wa.me/595984921554?text=${encodeURIComponent(message)}`, '_blank');
                 }}
-                className="space-y-8"
+                className="space-y-6"
               >
-                <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Nombre Completo</label>
-                  <input 
-                    name="name"
-                    type="text" 
-                    required
-                    placeholder="Tu nombre..."
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors"
-                  />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Nombre Completo</label>
+                    <input 
+                      name="name"
+                      type="text" 
+                      required
+                      placeholder="Tu nombre..."
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Servicio</label>
+                    <select 
+                      name="service"
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
+                    >
+                      {services.map(s => <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
+                      <option value="Otros" className="bg-[#0a0a0a]">Otros</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Servicio de Interés</label>
-                  <select 
-                    name="service"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none"
-                  >
-                    {services.map(s => <option key={s.id} value={s.title} className="bg-[#0a0a0a]">{s.title}</option>)}
-                    <option value="Otros" className="bg-[#0a0a0a]">Otros</option>
-                  </select>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tipo de Obra</label>
+                    <select name="type" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none">
+                      <option value="Residencial" className="bg-[#0a0a0a]">Residencial</option>
+                      <option value="Comercial" className="bg-[#0a0a0a]">Comercial</option>
+                      <option value="Industrial" className="bg-[#0a0a0a]">Industrial</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Urgencia</label>
+                    <select name="urgency" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none">
+                      <option value="Inmediata" className="bg-[#0a0a0a]">Inmediata</option>
+                      <option value="15 días" className="bg-[#0a0a0a]">15 días</option>
+                      <option value="1 mes+" className="bg-[#0a0a0a]">1 mes+</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-white/30">Tamaño</label>
+                    <select name="size" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-emerald-500 transition-colors appearance-none">
+                      <option value="Pequeño (< 50m²)" className="bg-[#0a0a0a]">Pequeño</option>
+                      <option value="Mediano (50-150m²)" className="bg-[#0a0a0a]">Mediano</option>
+                      <option value="Grande (> 150m²)" className="bg-[#0a0a0a]">Grande</option>
+                    </select>
+                  </div>
                 </div>
+
                 <button 
                   type="submit"
                   className="w-full bg-white text-black py-6 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-emerald-500 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Enviar a WhatsApp
                 </button>
-                <p className="text-[8px] text-center uppercase tracking-widest text-white/20">
-                  Te responderemos en menos de 24 horas hábiles.
-                </p>
               </form>
             </motion.div>
           </div>
