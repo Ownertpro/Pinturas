@@ -253,7 +253,7 @@ export default function App() {
                     Estándar de Calidad Hermética
                   </span>
                 </div>
-                <h1 className="font-serif text-[clamp(3.5rem,10vw,8rem)] leading-[0.85] tracking-tighter mb-12">
+                <h1 className="font-serif text-[clamp(2.5rem,10vw,8rem)] leading-[0.85] tracking-tighter mb-12">
                   ACABADOS <br />
                   <span className="italic text-white/30">QUE PERDURAN.</span>
                 </h1>
@@ -351,7 +351,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Portafolio de Especialidades</h2>
-              <h3 className="font-serif text-5xl lg:text-7xl leading-none tracking-tight">
+              <h3 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] leading-none tracking-tight">
                 SOLUCIONES <br />
                 <span className="italic text-white/20">TÉCNICAS.</span>
               </h3>
@@ -551,7 +551,7 @@ export default function App() {
             
             <div className="order-1 lg:order-2">
               <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Ingeniería de Acabado</h2>
-              <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight">
+              <h3 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] mb-12 leading-tight">
                 CAPAS DE <br />
                 <span className="italic text-white/30">PERFECCIÓN.</span>
               </h3>
@@ -573,7 +573,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-2xl">
               <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Resultados Reales</h2>
-              <h3 className="font-serif text-5xl lg:text-7xl leading-none tracking-tight">
+              <h3 className="font-serif text-[clamp(1.8rem,8vw,4.5rem)] leading-none tracking-tight">
                 EL PODER DE LA <br />
                 <span className="italic text-white/20">TRANSFORMACIÓN.</span>
               </h3>
@@ -858,7 +858,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Testimonios</h2>
-            <h3 className="font-serif text-5xl lg:text-7xl italic">Voces de Confianza.</h3>
+            <h3 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] italic">Voces de Confianza.</h3>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -911,7 +911,7 @@ export default function App() {
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-24">
             <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-6">Preguntas Frecuentes</h2>
-            <h3 className="font-serif text-5xl lg:text-6xl italic">Despeja tus Dudas.</h3>
+            <h3 className="font-serif text-[clamp(2.5rem,8vw,4rem)] italic">Despeja tus Dudas.</h3>
           </div>
           
           <div className="space-y-6">
@@ -964,7 +964,7 @@ export default function App() {
               className="text-left"
             >
               <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-emerald-500 mb-8">Contacto</h2>
-              <h3 className="font-serif text-5xl lg:text-8xl mb-12 leading-[0.9] tracking-tighter">
+              <h3 className="font-serif text-[clamp(2.5rem,8vw,6rem)] mb-12 leading-[0.9] tracking-tighter">
                 HABLEMOS DE TU <br />
                 <span className="italic text-white/20">PROYECTO.</span>
               </h3>
