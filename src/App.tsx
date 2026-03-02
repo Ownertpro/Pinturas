@@ -569,10 +569,6 @@ export default function App() {
               <p className="text-white/50 text-lg leading-relaxed mb-12">
                 No solo pintamos; construimos una armadura estética para tu hogar. Cada capa cumple una función técnica específica para garantizar la durabilidad hermética.
               </p>
-              <div className="flex items-center gap-4 p-6 glass-panel rounded-3xl border-emerald-500/20">
-                <ShieldCheck className="text-emerald-500 w-8 h-8" />
-                <div className="text-sm font-medium">Garantía de integridad estructural por 5 años.</div>
-              </div>
             </div>
           </div>
         </div>
