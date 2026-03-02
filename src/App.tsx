@@ -726,14 +726,13 @@ export default function App() {
             >
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border border-white/10 relative">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.5!2d-57.4!3d-25.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDEyJzAwLjAiUyA1N8KwMjQnMDAuMCJX!5e0!3m2!1ses!2spy!4v1700000000000!5m2!1ses!2spy"
-                  className="absolute inset-0 w-full h-full grayscale invert opacity-50 contrast-125 group-hover:opacity-80 transition-opacity"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57763.5837244585!2d-57.52442435!3d-25.17645185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da5903875c617%3A0x639686a68812830!2sLimpio!5e0!3m2!1ses!2spy!4v1710000000000!5m2!1ses!2spy"
+                  className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-transparent" />
               </div>
               <div className="absolute -bottom-8 -left-8 glass-panel p-8 rounded-3xl border-emerald-500/20 z-10">
                 <div className="text-4xl font-serif italic mb-2">100%</div>
