@@ -22,7 +22,10 @@ import {
   Zap,
   Clock,
   MapPin,
-  ChevronRight
+  ChevronRight,
+  Share2,
+  Linkedin,
+  ArrowUp
 } from "lucide-react";
 import { useState, useRef } from "react";
 
@@ -360,7 +363,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="mt-16">
+                <div className="mt-16 flex flex-wrap gap-4">
                   <a 
                     href={whatsappLink}
                     className="inline-flex items-center gap-4 bg-emerald-500 text-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -368,6 +371,24 @@ export default function App() {
                     Consultar por este servicio
                     <ArrowUpRight size={16} />
                   </a>
+                  <button 
+                    onClick={() => {
+                      if (navigator.share) {
+                        navigator.share({
+                          title: selectedService.title,
+                          text: selectedService.description,
+                          url: window.location.href,
+                        });
+                      } else {
+                        navigator.clipboard.writeText(window.location.href);
+                        alert("Enlace copiado al portapapeles");
+                      }
+                    }}
+                    className="inline-flex items-center gap-4 glass-panel text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-all"
+                  >
+                    Compartir
+                    <Share2 size={16} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -390,17 +411,17 @@ export default function App() {
                 {[
                   {
                     title: "Sellado Estructural",
-                    desc: "Eliminamos porosidad y microfisuras antes de la aplicación.",
+                    desc: "Eliminamos porosidad y microfisuras antes de la aplicación para garantizar la integridad del sustrato.",
                     icon: <Maximize className="w-5 h-5" />
                   },
                   {
                     title: "Pigmentación Pura",
-                    desc: "Utilizamos bases de alta densidad para colores vibrantes y eternos.",
+                    desc: "Utilizamos bases de alta densidad con carga de sólidos superior para colores vibrantes y resistentes al tiempo.",
                     icon: <Zap className="w-5 h-5" />
                   },
                   {
                     title: "Control de Humedad",
-                    desc: "Barreras químicas invisibles que protegen la integridad del muro.",
+                    desc: "Implementamos barreras hidrófugas de última generación que permiten la transpiración natural del muro.",
                     icon: <Droplets className="w-5 h-5" />
                   }
                 ].map((item, i) => (
@@ -537,9 +558,6 @@ export default function App() {
             <div>
               <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/50 mb-8">Social</h5>
               <div className="flex gap-4">
-                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                  <Instagram size={18} />
-                </a>
                 <a 
                   href="https://www.facebook.com/share/17eK6YPb9d/" 
                   target="_blank"
@@ -547,6 +565,12 @@ export default function App() {
                   className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all"
                 >
                   <Facebook size={18} />
+                </a>
+                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                  <Instagram size={18} />
+                </a>
+                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                  <Linkedin size={18} />
                 </a>
               </div>
             </div>
@@ -589,6 +613,16 @@ export default function App() {
           </div>
         </div>
       </motion.a>
+
+      {/* Scroll to Top */}
+      <motion.button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="fixed bottom-28 right-10 z-[90] w-10 h-10 glass-panel rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all"
+      >
+        <ArrowUp size={16} />
+      </motion.button>
     </div>
   );
 }
