@@ -862,8 +862,8 @@ Espero su respuesta, gracias!`;
             >
               <div className="aspect-[4/5] rounded-xl overflow-hidden border border-[#e9ecef] relative shadow-2xl">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57763.5837244585!2d-57.52442435!3d-25.17645185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da5903875c617%3A0x639686a68812830!2sLimpio!5e0!3m2!1ses!2spy!4v1710000000000!5m2!1ses!2spy"
-                  className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-700"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3611.8841416551!2d-57.4833!3d-25.1667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da5903875c617%3A0x639686a68812830!2sLimpio!5e0!3m2!1ses!2spy!4v1710000000000!5m2!1ses!2spy"
+                  className="absolute inset-0 w-full h-full transition-opacity duration-700"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
