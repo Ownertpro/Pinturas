@@ -175,9 +175,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex items-center justify-between bg-white px-8 py-3 rounded-xl border border-[#e9ecef] shadow-md">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-[#3c6994] rounded-lg flex items-center justify-center text-white font-bold text-xs">
-              PA
+              EK
             </div>
-            <span className="font-sans text-lg tracking-tight font-bold text-slate-900">Pinturas & Acabados</span>
+            <span className="font-sans text-lg tracking-tight font-bold text-slate-900">Ekopia</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -244,7 +244,7 @@ export default function App() {
                   </span>
                 </div>
                 <h1 className="font-sans text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[1.1] tracking-tight mb-8 text-slate-900">
-                  Tu Pintor de Confianza para <span className="text-[#3c6994]">Trabajos Finos.</span>
+                  Ekopia: El Arte de Pintar tu <span className="text-[#3c6994]">Espacio.</span>
                 </h1>
                 <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl font-medium">
                   Especialistas responsables en la aplicación técnica de recubrimientos premium: 
@@ -1133,8 +1133,8 @@ Espero su respuesta, gracias!`;
           <div className="grid md:grid-cols-4 gap-16 mb-24">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-[#3c6994] rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-lg shadow-[#3c6994]/20">PA</div>
-                <span className="font-sans text-xl tracking-tight font-extrabold text-slate-900 uppercase">Pinturas & Acabados</span>
+                <div className="w-8 h-8 bg-[#3c6994] rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-lg shadow-[#3c6994]/20">EK</div>
+                <span className="font-sans text-xl tracking-tight font-extrabold text-slate-900 uppercase">Ekopia</span>
               </div>
               <p className="text-slate-500 text-sm leading-relaxed max-w-sm mb-4 font-medium">
                 Elevando el estándar de la pintura profesional a través de la técnica, 
@@ -1195,7 +1195,7 @@ Espero su respuesta, gracias!`;
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-[#e9ecef]">
             <div className="text-[10px] uppercase tracking-widest font-bold text-slate-300">
-              © 2024 Pinturas & Acabados Profesionales — Fabián Paul Sanabria
+              © 2024 Ekopia — Fabián Paul Sanabria
             </div>
             <div className="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-300">
               <a href="#" className="hover:text-[#3c6994] transition-colors">Privacidad</a>
