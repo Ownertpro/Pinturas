@@ -39,12 +39,12 @@ import { useState, useRef, useEffect } from "react";
 const services = [
   {
     id: "01",
-    title: "Pintura de Alta Gama",
-    description: "Acabados de lujo para interiores y exteriores con pigmentos de máxima durabilidad.",
+    title: "Pintura Interior & Exterior",
+    description: "Pintor de confianza para acabados de lujo en interiores y exteriores con pigmentos de máxima durabilidad.",
     icon: <Paintbrush className="w-5 h-5" />,
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
     details: {
-      features: ["Pigmentos de alta resistencia UV", "Acabado lavable y antimanchas", "Resultados de calidad superior"],
+      features: ["Pigmentos de alta resistencia UV", "Acabado lavable y antimanchas", "Trabajo fino y responsable"],
       process: ["Limpieza profunda de superficie", "Aplicación de imprimante sellador", "Doble capa de pintura premium"],
       benefits: "Ideal para residencias que buscan un look sofisticado y una protección duradera contra el clima."
     }
@@ -52,11 +52,11 @@ const services = [
   {
     id: "02",
     title: "Texturado & Enduido",
-    description: "Preparación técnica de superficies para una planimetría perfecta y texturas artesanales.",
+    description: "Preparación técnica de superficies con enduido plástico para una planimetría perfecta y texturas artesanales.",
     icon: <Layers className="w-5 h-5" />,
     image: "https://images.unsplash.com/photo-1562664377-709f2c337eb2?auto=format&fit=crop&q=80&w=800",
     details: {
-      features: ["Nivelación milimétrica", "Texturas personalizadas (Travertino, Rulato, etc.)", "Ocultamiento total de imperfecciones"],
+      features: ["Nivelación milimétrica con enduido", "Texturas personalizadas (Travertino, Rulato, etc.)", "Ocultamiento total de imperfecciones"],
       process: ["Lijado mecánico de base", "Aplicación de enduido plástico", "Texturado artesanal con llana"],
       benefits: "Transforma paredes irregulares en superficies de diseño con alta resistencia estructural."
     }
@@ -64,7 +64,7 @@ const services = [
   {
     id: "03",
     title: "Impermeabilizado",
-    description: "Sistemas de sellado hermético multicapa para protección total contra agentes climáticos.",
+    description: "Sistemas de sellado hermético y pintura impermeabilizante para protección total contra agentes climáticos.",
     icon: <Droplets className="w-5 h-5" />,
     image: "https://images.unsplash.com/photo-1635424710928-0544e8512eae?auto=format&fit=crop&q=80&w=800",
     details: {
@@ -75,12 +75,12 @@ const services = [
   },
   {
     id: "04",
-    title: "Resinas & Barnices",
-    description: "Tratamientos de protección con resinas epóxicas y barnices de alto brillo o mate profundo.",
+    title: "Pintura Epoxi & Barnices",
+    description: "Tratamientos de protección con pintura epoxi de alta resistencia y barnices de alto brillo o mate profundo.",
     icon: <Sparkles className="w-5 h-5" />,
     image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=800",
     details: {
-      features: ["Resistencia extrema a rayones", "Realce natural de vetas en madera", "Acabados espejo o mate profundo"],
+      features: ["Pintura epoxi de alta resistencia", "Realce natural de vetas en madera", "Acabados espejo o mate profundo"],
       process: ["Pulido fino de superficie", "Descontaminación total", "Aplicación controlada de resina/barniz"],
       benefits: "Protección de lujo para pisos y maderas, garantizando una estética premium y fácil mantenimiento."
     }
@@ -244,11 +244,11 @@ export default function App() {
                   </span>
                 </div>
                 <h1 className="font-sans text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[1.1] tracking-tight mb-8 text-slate-900">
-                  Pintura y Acabados de <span className="text-[#3c6994]">Alta Gama.</span>
+                  Tu Pintor de Confianza para <span className="text-[#3c6994]">Trabajos Finos.</span>
                 </h1>
                 <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl font-medium">
-                  Especialistas en la aplicación técnica de recubrimientos premium. 
-                  Garantizamos terminaciones impecables y durabilidad extrema en cada proyecto.
+                  Especialistas responsables en la aplicación técnica de recubrimientos premium: 
+                  texturado, enduido, pintura epoxi e impermeabilizados de alta gama.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a 
