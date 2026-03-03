@@ -124,24 +124,24 @@ export default function App() {
   const whatsappLink = `https://wa.me/595984921554`;
 
   return (
-    <div ref={containerRef} className="relative bg-[#f0f2f5] text-slate-900 selection:bg-blue-500/30 cursor-none">
+    <div ref={containerRef} className="relative bg-[#f8f9fa] text-slate-900 selection:bg-[#3c6994]/30 cursor-none">
       {/* Custom Cursor */}
       <motion.div 
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-blue-600/50 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#3c6994]/50 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
         animate={{ 
           x: cursorPos.x - 16, 
           y: cursorPos.y - 16,
           scale: isHovering ? 2 : 1,
-          backgroundColor: isHovering ? "rgba(37, 99, 235, 0.1)" : "transparent"
+          backgroundColor: isHovering ? "rgba(60, 105, 148, 0.1)" : "transparent"
         }}
         transition={{ type: "spring", damping: 20, stiffness: 250, mass: 0.5 }}
       >
-        <div className="w-1 h-1 bg-blue-600 rounded-full" />
+        <div className="w-1 h-1 bg-[#3c6994] rounded-full" />
       </motion.div>
 
       {/* Scroll Progress Bar */}
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 origin-left z-[100]"
+        className="fixed top-0 left-0 right-0 h-1 bg-[#3c6994] origin-left z-[100]"
         style={{ scaleX }}
       />
 
@@ -153,41 +153,41 @@ export default function App() {
         animate={{ x: notification ? 24 : -400, opacity: notification ? 1 : 0 }}
         className="fixed bottom-32 left-0 z-[110] hidden md:block"
       >
-        <div className="glass-panel p-4 rounded-2xl border-blue-600/20 flex items-center gap-4 shadow-2xl">
-          <div className="w-10 h-10 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-600">
+        <div className="bg-white p-4 rounded-xl border border-[#e9ecef] flex items-center gap-4 shadow-lg">
+          <div className="w-10 h-10 rounded-full bg-[#3c6994]/10 flex items-center justify-center text-[#3c6994]">
             <Users size={20} />
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Solicitud Reciente</div>
-            <div className="text-xs font-bold">Alguien en <span className="text-blue-600">{notification?.city}</span> pidió un presupuesto</div>
+            <div className="text-xs font-bold">Alguien en <span className="text-[#3c6994]">{notification?.city}</span> pidió un presupuesto</div>
           </div>
         </div>
       </motion.div>
       
       {/* Immersive Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#3c6994]/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#3c6994]/5 blur-[120px] rounded-full" />
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-[60] px-6 py-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between glass-panel px-8 py-4 rounded-full border-slate-200">
+      <nav className="fixed top-0 w-full z-[60] px-6 py-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between bg-white px-8 py-3 rounded-xl border border-[#e9ecef] shadow-md">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">
+            <div className="w-8 h-8 bg-[#3c6994] rounded-lg flex items-center justify-center text-white font-bold text-xs">
               PA
             </div>
-            <span className="font-serif text-lg tracking-tight font-medium text-slate-900">Pinturas & Acabados</span>
+            <span className="font-sans text-lg tracking-tight font-bold text-slate-900">Pinturas & Acabados</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8">
             {["Servicios", "Nosotros", "Procesos", "Testimonios", "FAQ", "Presupuesto"].map((item) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase() === 'presupuesto' ? 'contacto' : item.toLowerCase()}`} 
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                className="text-xs uppercase tracking-[0.2em] font-semibold text-slate-500 hover:text-blue-600 transition-colors"
+                className="text-xs uppercase tracking-wider font-bold text-slate-600 hover:text-[#3c6994] transition-colors"
               >
                 {item}
               </a>
@@ -204,22 +204,22 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="absolute top-24 left-6 right-6 glass-panel p-8 rounded-3xl md:hidden"
+            className="absolute top-20 left-6 right-6 bg-white p-8 rounded-xl md:hidden shadow-xl border border-[#e9ecef]"
           >
             <div className="flex flex-col gap-6">
-              <a href="#servicios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Servicios</a>
-              <a href="#nosotros" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Nosotros</a>
-              <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Procesos</a>
-              <a href="#testimonios" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">Testimonios</a>
-              <a href="#faq" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic">FAQ</a>
-              <a href="#contacto" onClick={() => setIsMenuOpen(false)} className="text-2xl font-serif italic text-blue-600">Presupuesto</a>
-              <a href={whatsappLink} className="text-2xl font-serif italic text-blue-500">WhatsApp</a>
+              <a href="#servicios" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Servicios</a>
+              <a href="#nosotros" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Nosotros</a>
+              <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Procesos</a>
+              <a href="#testimonios" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Testimonios</a>
+              <a href="#faq" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">FAQ</a>
+              <a href="#contacto" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-[#3c6994]">Presupuesto</a>
+              <a href={whatsappLink} className="text-xl font-bold text-[#3c6994]">WhatsApp</a>
               <a 
                 href="https://www.facebook.com/share/17eK6YPb9d/" 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)} 
-                className="text-2xl font-serif italic text-blue-400"
+                className="text-xl font-bold text-[#3c6994]"
               >
                 Facebook
               </a>
@@ -228,50 +228,36 @@ export default function App() {
         )}
       </nav>
 
-      {/* Hero Section - Editorial Style */}
-      <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1621905252507-b354bcadcabc?auto=format&fit=crop&q=80&w=1920" 
-            alt="Fondo de Pintura y Enduido Profesional" 
-            className="w-full h-full object-cover opacity-20 grayscale"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-[#f0f2f5]" />
-        </div>
-
+      {/* Hero Section - Professional Community Style */}
+      <section className="relative min-h-[80vh] flex items-center pt-32 pb-20 overflow-hidden bg-white border-b border-[#e9ecef]">
         <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-end">
-            <div className="lg:col-span-8">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            <div className="lg:col-span-7">
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6 }}
               >
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="h-[1px] w-12 bg-blue-600" />
-                  <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-blue-600">
-                    Estándar de Calidad Hermética
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#3c6994]/10 rounded-full mb-8">
+                  <span className="text-[10px] uppercase tracking-wider font-bold text-[#3c6994]">
+                    Estándar de Calidad Profesional
                   </span>
                 </div>
-                <h1 className="font-serif text-[clamp(2.5rem,10vw,8rem)] leading-[0.85] tracking-tighter mb-12 text-slate-900">
-                  ACABADOS <br />
-                  <span className="italic text-slate-300">QUE PERDURAN.</span>
+                <h1 className="font-sans text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[1.1] tracking-tight mb-8 text-slate-900">
+                  Pintura y Acabados de <span className="text-[#3c6994]">Alta Gama.</span>
                 </h1>
-                <div className="grid md:grid-cols-2 gap-12 items-start">
-                  <p className="text-lg text-slate-500 leading-relaxed font-light">
-                    Especialistas en la aplicación técnica de recubrimientos de alta gama. 
-                    Nuestra metodología garantiza una terminación hermética y una estética impecable.
-                  </p>
-                <div className="flex flex-wrap gap-6 mt-12">
+                <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl font-medium">
+                  Especialistas en la aplicación técnica de recubrimientos premium. 
+                  Garantizamos terminaciones impecables y durabilidad extrema en cada proyecto.
+                </p>
+                <div className="flex flex-wrap gap-4">
                   <a 
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-                    className="bg-blue-600 text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-blue-700 transition-all hover:scale-105 active:scale-95"
+                    className="bg-[#3c6994] text-white px-8 py-4 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-[#2d4f70] transition-all shadow-lg shadow-[#3c6994]/20"
                   >
                     Solicitar Presupuesto
                   </a>
@@ -279,67 +265,52 @@ export default function App() {
                     href="#servicios"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-                    className="glass-panel text-slate-900 px-10 py-5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white transition-all"
+                    className="bg-white border border-[#e9ecef] text-slate-900 px-8 py-4 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-slate-50 transition-all shadow-sm"
                   >
-                    Ver Servicios
+                    Nuestros Servicios
                   </a>
                 </div>
 
-                  <div className="flex gap-12 mt-16 pt-12 border-t border-slate-200">
-                    {[
-                      { val: "524", label: "Proyectos", isCounter: true },
-                      { val: "15+", label: "Años", isCounter: false },
-                      { val: "100%", label: "Garantía", isCounter: false }
-                    ].map((stat, i) => (
-                      <div key={i}>
-                        <div className="text-3xl font-serif italic mb-1 text-slate-900">
-                          {stat.isCounter ? (
-                            <motion.span
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                            >
-                              524
-                            </motion.span>
-                          ) : stat.val}
-                        </div>
-                        <div className="text-[8px] uppercase tracking-widest font-bold text-slate-400">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="flex gap-12 mt-16 pt-8 border-t border-[#e9ecef]">
+                  {[
+                    { val: "524", label: "Proyectos Realizados" },
+                    { val: "15+", label: "Años de Experiencia" },
+                    { val: "100%", label: "Garantía de Calidad" }
+                  ].map((stat, i) => (
+                    <div key={i}>
+                      <div className="text-2xl font-bold text-slate-900 mb-1">{stat.val}</div>
+                      <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">{stat.label}</div>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </div>
             
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-5">
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="relative group"
+                transition={{ duration: 0.8 }}
+                className="relative"
               >
-                <div className="aspect-[3/4] rounded-[2rem] overflow-hidden border border-slate-200 relative">
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[#e9ecef] shadow-2xl">
                   <img 
                     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" 
                     alt="Luxury Interior"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover transition-all duration-700"
                     referrerPolicy="no-referrer"
                   />
-                  
-                  {/* Technical HUD Overlay */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-8 right-8 text-right">
-                      <div className="text-[8px] font-mono text-blue-600 uppercase tracking-widest mb-1">Surface Analysis</div>
-                      <div className="text-xs font-mono text-slate-400">99.8% Purity</div>
-                    </div>
-                    <div className="absolute bottom-8 right-8">
-                      <div className="w-12 h-12 border-r border-b border-blue-600/30" />
-                    </div>
-                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-blue-600/10 animate-scan" />
-                  </div>
                 </div>
-                <div className="absolute -bottom-10 -left-10 w-48 h-48 glass-panel rounded-full flex flex-col items-center justify-center text-center p-6 animate-float">
-                  <div className="text-4xl font-serif italic mb-1 text-slate-900">15+</div>
-                  <div className="text-[8px] uppercase tracking-widest font-bold text-slate-400">Años de Maestría</div>
+                <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl border border-[#e9ecef] shadow-xl">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#3c6994]/10 rounded-lg flex items-center justify-center text-[#3c6994]">
+                      <Award size={24} />
+                    </div>
+                    <div>
+                      <div className="text-xl font-bold text-slate-900">Certificado</div>
+                      <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Calidad Premium</div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -348,7 +319,7 @@ export default function App() {
       </section>
 
       {/* Call to Action - Minimalist & Powerful (Moved Up) */}
-      <section id="contacto" className="py-32 relative overflow-hidden bg-white">
+      <section id="contacto" className="py-32 relative overflow-hidden bg-[#f8f9fa]">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <motion.div
@@ -357,28 +328,28 @@ export default function App() {
               viewport={{ once: true }}
               className="text-left"
             >
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-8">Presupuesto</h2>
-              <h3 className="font-serif text-[clamp(2.5rem,8vw,6rem)] mb-12 leading-[0.9] tracking-tighter text-slate-900">
-                HABLEMOS DE TU <br />
-                <span className="italic text-slate-200">PROYECTO.</span>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Presupuesto</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-12 leading-[1.1] tracking-tight text-slate-900">
+                Hablemos de tu <br />
+                <span className="text-[#3c6994]">Proyecto.</span>
               </h3>
-              <p className="text-slate-500 text-lg leading-relaxed mb-12 max-w-md">
+              <p className="text-slate-600 text-lg leading-relaxed mb-12 max-w-md font-medium">
                 Estamos listos para asesorarte y brindarte un presupuesto detallado sin compromiso. 
-                Tu patrimonio merece el estándar hermético.
+                Tu patrimonio merece el estándar de calidad profesional.
               </p>
               
               <div className="space-y-8">
                 <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-blue-600">
+                  <div className="w-12 h-12 rounded-lg bg-white border border-[#e9ecef] flex items-center justify-center text-[#3c6994] shadow-sm">
                     <Phone size={20} />
                   </div>
                   <div>
                     <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">WhatsApp Directo</div>
-                    <a href={whatsappLink} className="text-xl font-bold hover:text-blue-600 transition-colors text-slate-900">{whatsappNumber}</a>
+                    <a href={whatsappLink} className="text-xl font-bold hover:text-[#3c6994] transition-colors text-slate-900">{whatsappNumber}</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-2xl glass-panel flex items-center justify-center text-blue-600">
+                  <div className="w-12 h-12 rounded-lg bg-white border border-[#e9ecef] flex items-center justify-center text-[#3c6994] shadow-sm">
                     <MapPin size={20} />
                   </div>
                   <div>
@@ -393,16 +364,16 @@ export default function App() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-10 md:p-16 rounded-[3rem] border-slate-200 shadow-xl"
+              className="bg-white p-10 md:p-12 rounded-xl border border-[#e9ecef] shadow-xl"
             >
               <div className="mb-10">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-blue-600">
+                  <div className="w-2 h-2 rounded-full bg-[#3c6994] animate-pulse" />
+                  <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#3c6994]">
                     Respuesta en menos de 24h hábiles
                   </span>
                 </div>
-                <h4 className="text-2xl font-serif italic text-slate-900">Solicita tu Presupuesto</h4>
+                <h4 className="text-2xl font-bold text-slate-900">Solicita tu Presupuesto</h4>
               </div>
 
               <form 
@@ -436,7 +407,7 @@ Espero su respuesta, gracias!`;
                       onMouseEnter={() => setIsHovering(true)}
                       onMouseLeave={() => setIsHovering(false)}
                       placeholder="Tu nombre..."
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600 transition-colors text-slate-900"
+                      className="w-full bg-[#f8f9fa] border border-[#e9ecef] rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors text-slate-900 font-medium"
                     />
                   </div>
                   <div className="space-y-2">
@@ -445,7 +416,7 @@ Espero su respuesta, gracias!`;
                       name="service"
                       onMouseEnter={() => setIsHovering(true)}
                       onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600 transition-colors appearance-none text-slate-900"
+                      className="w-full bg-[#f8f9fa] border border-[#e9ecef] rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors appearance-none text-slate-900 font-medium"
                     >
                       {services.map(s => <option key={s.id} value={s.title} className="bg-white">{s.title}</option>)}
                       <option value="Otros" className="bg-white">Otros</option>
@@ -460,7 +431,7 @@ Espero su respuesta, gracias!`;
                       name="type" 
                       onMouseEnter={() => setIsHovering(true)}
                       onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600 transition-colors appearance-none text-slate-900"
+                      className="w-full bg-[#f8f9fa] border border-[#e9ecef] rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors appearance-none text-slate-900 font-medium"
                     >
                       <option value="Residencial" className="bg-white">Residencial</option>
                       <option value="Comercial" className="bg-white">Comercial</option>
@@ -473,7 +444,7 @@ Espero su respuesta, gracias!`;
                       name="urgency" 
                       onMouseEnter={() => setIsHovering(true)}
                       onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600 transition-colors appearance-none text-slate-900"
+                      className="w-full bg-[#f8f9fa] border border-[#e9ecef] rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors appearance-none text-slate-900 font-medium"
                     >
                       <option value="Inmediata" className="bg-white">Inmediata</option>
                       <option value="15 días" className="bg-white">15 días</option>
@@ -486,7 +457,7 @@ Espero su respuesta, gracias!`;
                       name="size" 
                       onMouseEnter={() => setIsHovering(true)}
                       onMouseLeave={() => setIsHovering(false)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-blue-600 transition-colors appearance-none text-slate-900"
+                      className="w-full bg-[#f8f9fa] border border-[#e9ecef] rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors appearance-none text-slate-900 font-medium"
                     >
                       <option value="Pequeño (< 50m²)" className="bg-white">Pequeño</option>
                       <option value="Mediano (50-150m²)" className="bg-white">Mediano</option>
@@ -499,7 +470,7 @@ Espero su respuesta, gracias!`;
                   type="submit"
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  className="w-full bg-blue-600 text-white py-6 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-blue-700 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full bg-[#3c6994] text-white py-5 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-[#2d4f70] transition-all shadow-lg shadow-[#3c6994]/20"
                 >
                   Enviar a WhatsApp
                 </button>
@@ -510,17 +481,17 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Services - Bento Grid Style */}
-      <section id="servicios" className="py-32 relative">
+      <section id="servicios" className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-6">Portafolio de Especialidades</h2>
-              <h3 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] leading-none tracking-tight text-slate-900">
-                SOLUCIONES <br />
-                <span className="italic text-slate-200">TÉCNICAS.</span>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Portafolio de Especialidades</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-none tracking-tight text-slate-900">
+                Soluciones <br />
+                <span className="text-[#3c6994]">Técnicas.</span>
               </h3>
             </div>
-            <p className="text-slate-500 max-w-xs text-sm leading-relaxed">
+            <p className="text-slate-500 max-w-xs text-sm leading-relaxed font-medium">
               Desde la preparación estructural hasta el acabado final, cada paso es ejecutado con rigor técnico.
             </p>
           </div>
@@ -536,20 +507,20 @@ Espero su respuesta, gracias!`;
                 onClick={() => setSelectedService(service)}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                className={`group relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white hover:shadow-xl transition-all duration-500 cursor-pointer ${
+                className={`group relative overflow-hidden rounded-xl border border-[#e9ecef] bg-white hover:shadow-xl transition-all duration-500 cursor-pointer ${
                   index === 0 || index === 3 ? "md:col-span-7" : "md:col-span-5"
                 }`}
               >
                 <div className="p-10 h-full flex flex-col justify-between min-h-[400px]">
                   <div>
                     <div className="flex items-center justify-between mb-12">
-                      <span className="font-mono text-xs text-blue-600/50">{service.id}</span>
-                      <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                      <span className="font-mono text-xs text-[#3c6994]/50">{service.id}</span>
+                      <div className="w-10 h-10 rounded-lg border border-[#e9ecef] flex items-center justify-center group-hover:bg-[#3c6994] group-hover:text-white transition-all shadow-sm">
                         {service.icon}
                       </div>
                     </div>
-                    <h4 className="text-3xl font-serif italic mb-4 text-slate-900">{service.title}</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
+                    <h4 className="text-2xl font-bold mb-4 text-slate-900">{service.title}</h4>
+                    <p className="text-sm text-slate-500 leading-relaxed max-w-xs font-medium">
                       {service.description}
                     </p>
                   </div>
@@ -557,7 +528,7 @@ Espero su respuesta, gracias!`;
                   <div 
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-                    className="mt-12 flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-slate-300 group-hover:text-blue-600 transition-colors"
+                    className="mt-12 flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-slate-400 group-hover:text-[#3c6994] transition-colors"
                   >
                     Explorar Detalle <ChevronRight size={12} />
                   </div>
@@ -575,119 +546,120 @@ Espero su respuesta, gracias!`;
 
       {/* Service Details Modal */}
       {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center px-6 py-12">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             onClick={() => setSelectedService(null)}
-            className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm"
           />
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="relative w-[95%] max-w-4xl max-h-[90vh] glass-panel rounded-[2rem] md:rounded-[3rem] overflow-hidden border-slate-200 flex flex-col lg:flex-row shadow-2xl"
+            className="relative w-[95%] max-w-4xl max-h-[90vh] bg-white rounded-xl overflow-hidden border border-[#e9ecef] flex flex-col lg:flex-row shadow-2xl"
           >
             <button 
               onClick={() => setSelectedService(null)}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
-              className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 rounded-full glass-panel flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all z-20"
+              className="absolute top-4 right-4 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#3c6994] transition-all z-20 shadow-lg"
             >
               <X size={20} />
             </button>
 
-            <div className="w-full lg:w-1/2 h-48 md:h-64 lg:h-auto relative overflow-hidden shrink-0">
+            <div className="lg:w-1/2 relative min-h-[250px] lg:min-h-full">
               <img 
                 src={selectedService.image} 
                 alt={selectedService.title} 
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
+                referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12">
-                <span className="font-mono text-[10px] md:text-xs text-blue-600 mb-2 md:mb-4 block">{selectedService.id}</span>
-                <h3 className="text-3xl md:text-5xl font-serif italic text-white">{selectedService.title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <span className="font-mono text-[10px] md:text-xs text-[#3c6994] mb-2 md:mb-4 block font-bold uppercase tracking-widest">Servicio {selectedService.id}</span>
+                <h3 className="text-3xl md:text-5xl font-extrabold text-white leading-tight">{selectedService.title}</h3>
               </div>
             </div>
 
-            <div className="w-full lg:w-1/2 p-8 md:p-12 lg:p-16 overflow-y-auto bg-white">
+            <div className="lg:w-1/2 p-8 md:p-12 overflow-y-auto">
               <div className="mb-12">
-                <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-blue-600 mb-6">Descripción</h4>
-                <p className="text-slate-600 leading-relaxed italic font-serif text-lg md:text-xl">
-                  "{selectedService.details.benefits}"
+                <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-6">Descripción</h4>
+                <p className="text-slate-600 leading-relaxed font-medium text-lg md:text-xl">
+                  {selectedService.description}
                 </p>
               </div>
 
-                <div className="grid gap-12">
-                  <div>
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-6">Características Clave</h4>
-                    <div className="space-y-4">
-                      {selectedService.details.features.map((feature, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <CheckCircle2 size={16} className="text-blue-600 shrink-0" />
-                          <span className="text-sm text-slate-700">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-6">Proceso de Aplicación</h4>
-                    <div className="space-y-6">
-                      {selectedService.details.process.map((step, i) => (
-                        <div key={i} className="flex gap-4">
-                          <span className="font-mono text-xs text-blue-600/40">{i + 1}</span>
-                          <span className="text-sm text-slate-600 leading-relaxed">{step}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+              <div className="grid md:grid-cols-2 gap-12">
+                <div className="space-y-6">
+                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400">Características</h4>
+                  <ul className="space-y-4">
+                    {selectedService.details.features.map((f, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-slate-700 font-medium">
+                        <CheckCircle2 size={16} className="text-[#3c6994] shrink-0 mt-0.5" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                <div className="mt-16 flex flex-wrap gap-4">
-                  <a 
-                    href={whatsappLink}
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
-                    className="inline-flex items-center gap-4 bg-blue-600 text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-blue-700 transition-colors"
-                  >
-                    Consultar por este servicio
-                    <ArrowUpRight size={16} />
-                  </a>
-                  <button 
-                    onClick={() => {
-                      if (navigator.share) {
-                        navigator.share({
-                          title: selectedService.title,
-                          text: selectedService.description,
-                          url: window.location.href,
-                        });
-                      } else {
-                        navigator.clipboard.writeText(window.location.href);
-                        alert("Enlace copiado al portapapeles");
-                      }
-                    }}
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
-                    className="inline-flex items-center gap-4 glass-panel text-slate-900 px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white transition-all"
-                  >
-                    Compartir
-                    <Share2 size={16} />
-                  </button>
+                <div className="space-y-6">
+                  <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400">Proceso</h4>
+                  <div className="space-y-6">
+                    {selectedService.details.process.map((step, i) => (
+                      <div key={i} className="flex gap-4">
+                        <span className="font-mono text-xs text-[#3c6994]/40 font-bold">{i + 1}</span>
+                        <span className="text-sm text-slate-600 leading-relaxed font-medium">{step}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
+
+              <div className="mt-16 pt-8 border-t border-[#e9ecef] flex flex-wrap gap-4">
+                <a 
+                  href={whatsappLink}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="inline-flex items-center gap-4 bg-[#3c6994] text-white px-8 py-4 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-[#2d4f70] transition-all shadow-lg shadow-[#3c6994]/20"
+                >
+                  Consultar Ahora
+                  <ArrowUpRight size={16} />
+                </a>
+                <button 
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: selectedService.title,
+                        text: selectedService.description,
+                        url: window.location.href,
+                      });
+                    } else {
+                      navigator.clipboard.writeText(window.location.href);
+                      alert("Enlace copiado al portapapeles");
+                    }
+                  }}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className="inline-flex items-center gap-4 bg-[#f8f9fa] border border-[#e9ecef] text-slate-900 px-8 py-4 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-slate-50 transition-all"
+                >
+                  Compartir
+                  <Share2 size={16} />
+                </button>
+              </div>
+            </div>
             </motion.div>
           </div>
         )}
 
       {/* Technical Breakdown Section */}
-      <section className="py-32 relative overflow-hidden">
+      <section className="py-32 relative bg-white border-y border-[#e9ecef]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="order-2 lg:order-1">
               <div className="relative">
-                <div className="aspect-square glass-panel rounded-[4rem] border-slate-200 p-12 flex flex-col justify-center gap-8 shadow-lg">
+                <div className="aspect-square bg-white rounded-xl border border-[#e9ecef] p-12 flex flex-col justify-center gap-8 shadow-xl">
                   {[
-                    { layer: "03", title: "Capa de Sellado Hermético", desc: "Barrera hidrófuga que impide el paso del agua pero permite la transpiración.", color: "bg-blue-600" },
+                    { layer: "03", title: "Capa de Sellado Hermético", desc: "Barrera hidrófuga que impide el paso del agua pero permite la transpiración.", color: "bg-[#3c6994]" },
                     { layer: "02", title: "Base de Nivelación", desc: "Enduido plástico de alta densidad para una planimetría perfecta.", color: "bg-slate-200" },
                     { layer: "01", title: "Imprimación Técnica", desc: "Puente de adherencia que consolida el sustrato original.", color: "bg-slate-100" }
                   ].map((layer, i) => (
@@ -698,29 +670,29 @@ Espero su respuesta, gracias!`;
                       transition={{ delay: i * 0.2 }}
                       className="flex gap-6 group"
                     >
-                      <div className={`w-12 h-12 rounded-xl ${layer.color} flex items-center justify-center font-mono text-xs ${i === 0 ? 'text-white' : 'text-slate-900'} font-bold shrink-0`}>
+                      <div className={`w-12 h-12 rounded-lg ${layer.color} flex items-center justify-center font-mono text-xs ${i === 0 ? 'text-white' : 'text-slate-900'} font-bold shrink-0 shadow-sm`}>
                         {layer.layer}
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold mb-1 group-hover:text-blue-600 transition-colors text-slate-900">{layer.title}</h4>
-                        <p className="text-xs text-slate-500 leading-relaxed">{layer.desc}</p>
+                        <h4 className="text-lg font-bold mb-1 group-hover:text-[#3c6994] transition-colors text-slate-900">{layer.title}</h4>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium">{layer.desc}</p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
                 {/* Decorative Elements */}
-                <div className="absolute -top-10 -right-10 w-40 h-40 border border-blue-600/10 rounded-full animate-spin-slow" />
+                <div className="absolute -top-10 -right-10 w-40 h-40 border border-[#3c6994]/10 rounded-full animate-spin-slow" />
               </div>
             </div>
             
             <div className="order-1 lg:order-2">
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-8">Ingeniería de Acabado</h2>
-              <h3 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] mb-12 leading-tight text-slate-900">
-                CAPAS DE <br />
-                <span className="italic text-slate-300">PERFECCIÓN.</span>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Ingeniería de Acabado</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-12 leading-tight text-slate-900">
+                Capas de <br />
+                <span className="text-[#3c6994]">Perfección.</span>
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed mb-12">
-                No solo pintamos; construimos una armadura estética para tu hogar. Cada capa cumple una función técnica específica para garantizar la durabilidad hermética.
+              <p className="text-slate-600 text-lg leading-relaxed mb-12 font-medium">
+                No solo pintamos; construimos una armadura estética para tu hogar. Cada capa cumple una función técnica específica para garantizar la durabilidad profesional.
               </p>
             </div>
           </div>
@@ -728,18 +700,18 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Before & After Section */}
-      <section className="py-32 relative overflow-hidden bg-white">
+      <section className="py-32 relative overflow-hidden bg-[#f8f9fa]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-6">Resultados Reales</h2>
-              <h3 className="font-serif text-[clamp(1.8rem,8vw,4.5rem)] leading-none tracking-tight text-slate-900">
-                EL PODER DE LA <br />
-                <span className="italic text-slate-200">TRANSFORMACIÓN.</span>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Resultados Reales</h2>
+              <h3 className="font-sans text-[clamp(1.8rem,5vw,4.5rem)] font-extrabold leading-none tracking-tight text-slate-900">
+                El Poder de la <br />
+                <span className="text-[#3c6994]">Transformación.</span>
               </h3>
             </div>
-            <p className="text-slate-500 max-w-xs text-sm leading-relaxed">
-              Visualiza el impacto de nuestro estándar hermético en proyectos reales.
+            <p className="text-slate-500 max-w-xs text-sm leading-relaxed font-medium">
+              Visualiza el impacto de nuestro estándar de calidad profesional en proyectos reales.
             </p>
           </div>
 
@@ -759,31 +731,31 @@ Espero su respuesta, gracias!`;
               }
             ].map((project, i) => (
               <div key={i} className="group relative">
-                <div className="aspect-video rounded-[3rem] overflow-hidden border border-slate-200 relative group/ba shadow-lg">
+                <div className="aspect-video rounded-xl overflow-hidden border border-[#e9ecef] relative group/ba shadow-xl">
                   <div className="absolute inset-0 flex">
-                    <div className="w-1/2 h-full relative overflow-hidden border-r border-slate-200">
+                    <div className="w-1/2 h-full relative overflow-hidden border-r border-[#e9ecef]">
                       <img src={project.before} alt="Before" className="w-full h-full object-cover grayscale" />
-                      <div className="absolute top-6 left-6 px-3 py-1 bg-slate-900/60 backdrop-blur-md rounded-full text-[8px] uppercase tracking-widest font-bold text-white">Antes</div>
+                      <div className="absolute top-6 left-6 px-3 py-1 bg-slate-900/60 backdrop-blur-md rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Antes</div>
                     </div>
                     <div className="w-1/2 h-full relative overflow-hidden">
                       <img src={project.after} alt="After" className="w-full h-full object-cover" />
-                      <div className="absolute top-6 right-6 px-3 py-1 bg-blue-600 rounded-full text-[8px] uppercase tracking-widest font-bold text-white">Después</div>
+                      <div className="absolute top-6 right-6 px-3 py-1 bg-[#3c6994] rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Después</div>
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60" />
                   
                   {/* Technical HUD Overlay */}
                   <div className="absolute inset-0 pointer-events-none opacity-0 group-hover/ba:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 border-[20px] border-blue-600/5" />
-                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-blue-600/20 animate-scan" />
-                    <div className="absolute bottom-12 left-12 font-mono text-[8px] text-blue-600 uppercase tracking-widest">
+                    <div className="absolute inset-0 border-[20px] border-[#3c6994]/5" />
+                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#3c6994]/20 animate-scan" />
+                    <div className="absolute bottom-12 left-12 font-mono text-[8px] text-[#3c6994] uppercase tracking-widest">
                       Delta Analysis: +42% Durability
                     </div>
                   </div>
                 </div>
                 <div className="mt-8 px-4">
-                  <h4 className="text-2xl font-serif italic mb-2 text-slate-900">{project.title}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed">{project.desc}</p>
+                  <h4 className="text-xl font-bold mb-2 text-slate-900">{project.title}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed font-medium">{project.desc}</p>
                 </div>
               </div>
             ))}
@@ -792,44 +764,48 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Service Area Section */}
-      <section className="py-32 relative">
+      <section className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="glass-panel p-12 md:p-24 rounded-[4rem] border-slate-200 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-            
-            <div className="grid lg:grid-cols-2 gap-24 items-center relative z-10">
-              <div>
-                <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-8">Cobertura</h2>
-                <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight text-slate-900">
-                  Llegamos a <br />
-                  <span className="italic text-slate-200">TU ZONA.</span>
+          <div className="bg-white rounded-xl border border-[#e9ecef] overflow-hidden shadow-xl">
+            <div className="grid lg:grid-cols-2">
+              <div className="p-12 lg:p-20">
+                <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Cobertura Estratégica</h2>
+                <h3 className="font-sans text-[clamp(2rem,4vw,3.5rem)] font-extrabold mb-8 leading-tight text-slate-900">
+                  Donde la Calidad <br />
+                  <span className="text-[#3c6994]">no tiene Fronteras.</span>
                 </h3>
-                <p className="text-slate-600 text-lg leading-relaxed mb-12">
-                  Nuestra base operativa en Limpio nos permite una respuesta ágil en todo el departamento Central y alrededores.
+                <p className="text-slate-600 text-lg leading-relaxed mb-12 font-medium">
+                  Operamos en los puntos más exigentes del país, llevando nuestro estándar de terminación profesional a cada proyecto.
                 </p>
                 
-                <div className="grid grid-cols-2 gap-4">
-                  {["Limpio", "Asunción", "Luque", "Mariano R. Alonso", "Lambaré", "San Lorenzo", "Fernando de la Mora", "Villa Elisa"].map((city) => (
-                    <div 
-                      key={city} 
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      className="flex items-center gap-3 text-sm text-slate-500 hover:text-blue-600 transition-colors cursor-default"
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600/40" />
-                      {city}
+                <div className="grid grid-cols-2 gap-8">
+                  {[
+                    { city: "Asunción", status: "Alta Prioridad" },
+                    { city: "Gran Asunción", status: "Cobertura Total" },
+                    { city: "Limpio", status: "Base Operativa" },
+                    { city: "Luque", status: "Zona Activa" }
+                  ].map((item, i) => (
+                    <div key={i} className="space-y-2">
+                      <div className="flex items-center gap-2 text-[#3c6994]">
+                        <MapPin size={14} className="fill-current" />
+                        <span className="font-bold text-slate-900">{item.city}</span>
+                      </div>
+                      <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">{item.status}</div>
                     </div>
                   ))}
                 </div>
               </div>
-              
-              <div className="relative">
-                <div className="aspect-square rounded-full border border-slate-200 p-8 flex items-center justify-center relative animate-spin-slow">
-                  <div className="absolute inset-0 border-2 border-dashed border-blue-600/20 rounded-full" />
-                  <MapPin size={48} className="text-blue-600" />
+              <div className="relative h-[400px] lg:h-auto bg-slate-100">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    <div className="w-64 h-64 border border-[#3c6994]/20 rounded-full animate-ping" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <MapPin size={48} className="text-[#3c6994]" />
+                    </div>
+                  </div>
                 </div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center pointer-events-none">
-                  <div className="w-3/4 h-3/4 bg-blue-600/10 blur-[80px] rounded-full" />
+                  <div className="w-3/4 h-3/4 bg-[#3c6994]/10 blur-[80px] rounded-full" />
                 </div>
               </div>
             </div>
@@ -838,7 +814,7 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* About Us Section */}
-      <section id="nosotros" className="py-32 relative overflow-hidden">
+      <section id="nosotros" className="py-32 relative bg-[#f8f9fa]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <motion.div
@@ -846,23 +822,23 @@ Espero su respuesta, gracias!`;
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-8">Sobre Nosotros</h2>
-              <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight text-slate-900">
-                Raíces en <span className="italic text-slate-200">Limpio.</span>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Sobre Nosotros</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-12 leading-tight text-slate-900">
+                Raíces en <span className="text-[#3c6994]">Limpio.</span>
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed mb-12 max-w-xl">
+              <p className="text-slate-600 text-lg leading-relaxed mb-12 max-w-xl font-medium">
                 Somos un equipo apasionado por la excelencia en acabados, operando desde el corazón de <strong>Isla Aranda, Limpio</strong>. 
-                Nuestra misión es elevar el estándar de la construcción en Paraguay a través de técnicas de sellado hermético y una estética impecable.
+                Nuestra misión es elevar el estándar de la construcción en Paraguay a través de técnicas de sellado profesional y una estética impecable.
               </p>
               
               <div className="flex flex-col gap-6">
-                <div className="flex items-center gap-6 glass-panel p-6 rounded-3xl border-slate-200">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-600">
+                <div className="flex items-center gap-6 bg-white p-6 rounded-xl border border-[#e9ecef] shadow-sm">
+                  <div className="w-12 h-12 rounded-lg bg-[#3c6994]/10 flex items-center justify-center text-[#3c6994]">
                     <MapPin size={24} />
                   </div>
                   <div>
                     <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-1">Ubicación Central</div>
-                    <div className="text-sm font-medium text-slate-900">Isla Aranda, Limpio — Paraguay</div>
+                    <div className="text-sm font-bold text-slate-900">Isla Aranda, Limpio — Paraguay</div>
                   </div>
                 </div>
                 
@@ -870,7 +846,7 @@ Espero su respuesta, gracias!`;
                   href="https://www.google.com/maps/search/Isla+Aranda,+Limpio" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-4 text-blue-600 text-xs uppercase tracking-[0.3em] font-bold hover:gap-6 transition-all"
+                  className="inline-flex items-center gap-4 text-[#3c6994] text-xs uppercase tracking-[0.3em] font-bold hover:gap-6 transition-all"
                 >
                   Ver en Google Maps
                   <ArrowUpRight size={16} />
@@ -884,19 +860,19 @@ Espero su respuesta, gracias!`;
               viewport={{ once: true }}
               className="relative group"
             >
-              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden border border-slate-200 relative shadow-xl">
+              <div className="aspect-[4/5] rounded-xl overflow-hidden border border-[#e9ecef] relative shadow-2xl">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57763.5837244585!2d-57.52442435!3d-25.17645185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da5903875c617%3A0x639686a68812830!2sLimpio!5e0!3m2!1ses!2spy!4v1710000000000!5m2!1ses!2spy"
-                  className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
+                  className="absolute inset-0 w-full h-full opacity-80 group-hover:opacity-100 transition-opacity grayscale hover:grayscale-0 duration-700"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-              <div className="absolute -bottom-8 -left-8 glass-panel p-8 rounded-3xl border-blue-600/20 z-10 shadow-xl">
-                <div className="text-4xl font-serif italic mb-2 text-slate-900">100%</div>
-                <div className="text-[10px] uppercase tracking-widest font-bold text-blue-600">Compromiso Local</div>
+              <div className="absolute -bottom-8 -left-8 bg-white p-8 rounded-xl border border-[#e9ecef] z-10 shadow-2xl">
+                <div className="text-4xl font-extrabold mb-2 text-slate-900">100%</div>
+                <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994]">Compromiso Local</div>
               </div>
             </motion.div>
           </div>
@@ -904,15 +880,14 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* The "Hermetic" Philosophy - Technical Dashboard Style */}
-      <section id="procesos" className="py-32 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
-        <div className="absolute inset-0 noise-bg opacity-10" />
+      <section id="procesos" className="py-32 bg-white border-y border-[#e9ecef] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-8">Filosofía de Trabajo</h2>
-              <h3 className="font-serif text-5xl lg:text-7xl mb-12 leading-tight text-slate-900">
-                EL ARTE DE LO <br />
-                <span className="italic text-slate-200">HERMÉTICO.</span>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Filosofía de Trabajo</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-12 leading-tight text-slate-900">
+                El Arte de lo <br />
+                <span className="text-[#3c6994]">Profesional.</span>
               </h3>
               <div className="space-y-12">
                 {[
@@ -933,12 +908,12 @@ Espero su respuesta, gracias!`;
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-6">
-                    <div className="w-14 h-14 rounded-2xl glass-panel flex items-center justify-center shrink-0 border-blue-600/20">
+                    <div className="w-14 h-14 rounded-lg bg-white border border-[#e9ecef] flex items-center justify-center shrink-0 text-[#3c6994] shadow-sm">
                       {item.icon}
                     </div>
                     <div>
                       <h4 className="text-xl font-bold mb-2 text-slate-900">{item.title}</h4>
-                      <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                      <p className="text-slate-500 text-sm leading-relaxed font-medium">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -946,9 +921,9 @@ Espero su respuesta, gracias!`;
             </div>
 
             <div className="relative">
-              <div className="aspect-square rounded-[3rem] border border-slate-200 p-4 relative overflow-hidden shadow-xl">
-                <div className="absolute inset-0 bg-blue-600/5 animate-pulse" />
-                <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border border-slate-200">
+              <div className="aspect-square rounded-xl border border-[#e9ecef] p-4 relative overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-[#3c6994]/5 animate-pulse" />
+                <div className="relative h-full w-full rounded-lg overflow-hidden border border-[#e9ecef]">
                   <img 
                     src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=1000" 
                     alt="Technical Work"
@@ -959,11 +934,11 @@ Espero su respuesta, gracias!`;
                   
                   {/* Technical Overlays */}
                   <div className="absolute top-8 left-8 flex flex-col gap-2">
-                    <div className="px-3 py-1 bg-white/80 backdrop-blur-md rounded-full border border-slate-200 text-[8px] font-mono uppercase tracking-widest flex items-center gap-2 text-slate-900">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping" />
+                    <div className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-md border border-[#e9ecef] text-[8px] font-mono uppercase tracking-widest flex items-center gap-2 text-slate-900 font-bold">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#3c6994] animate-ping" />
                       Scanning Surface
                     </div>
-                    <div className="px-3 py-1 bg-white/80 backdrop-blur-md rounded-full border border-slate-200 text-[8px] font-mono uppercase tracking-widest text-slate-900">
+                    <div className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-md border border-[#e9ecef] text-[8px] font-mono uppercase tracking-widest text-slate-900 font-bold">
                       Density: 98.4%
                     </div>
                   </div>
@@ -971,16 +946,16 @@ Espero su respuesta, gracias!`;
               </div>
               
               {/* Floating Stats */}
-              <div className="absolute -bottom-8 -right-8 glass-panel p-8 rounded-3xl border-blue-600/30 shadow-xl">
+              <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-xl border border-[#e9ecef] z-10 shadow-2xl">
                 <div className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-4">Estado del Servicio</div>
                 <div className="flex items-center gap-6">
                   <div>
-                    <div className="text-3xl font-serif italic text-slate-900">100%</div>
-                    <div className="text-[8px] uppercase tracking-widest font-bold text-blue-600">Hermético</div>
+                    <div className="text-3xl font-extrabold text-slate-900">100%</div>
+                    <div className="text-[8px] uppercase tracking-widest font-bold text-[#3c6994]">Profesional</div>
                   </div>
                   <div className="w-[1px] h-10 bg-slate-200" />
                   <div>
-                    <div className="text-3xl font-serif italic text-slate-900">0.0</div>
+                    <div className="text-3xl font-extrabold text-slate-900">0.0</div>
                     <div className="text-[8px] uppercase tracking-widest font-bold text-slate-400">Margen Error</div>
                   </div>
                 </div>
@@ -991,7 +966,7 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Trust Badges Section */}
-      <section className="py-20 border-y border-slate-200 bg-white">
+      <section className="py-20 border-y border-[#e9ecef] bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
@@ -1001,11 +976,11 @@ Espero su respuesta, gracias!`;
               { icon: <Users className="w-6 h-6" />, label: "Atención 1 a 1", sub: "Asesoría directa" }
             ].map((item, i) => (
               <div key={i} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 rounded-2xl glass-panel flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-blue-600 shadow-md">
+                <div className="w-16 h-16 rounded-xl bg-white border border-[#e9ecef] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 text-[#3c6994] shadow-sm">
                   {item.icon}
                 </div>
                 <div className="text-xs uppercase tracking-widest font-bold mb-2 text-slate-900">{item.label}</div>
-                <div className="text-[10px] text-slate-400 uppercase tracking-widest">{item.sub}</div>
+                <div className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{item.sub}</div>
               </div>
             ))}
           </div>
@@ -1013,17 +988,17 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonios" className="py-32 relative overflow-hidden">
+      <section id="testimonios" className="py-32 relative overflow-hidden bg-[#f8f9fa]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-6">Testimonios</h2>
-            <h3 className="font-serif text-[clamp(2.5rem,8vw,4.5rem)] italic text-slate-900">Voces de Confianza.</h3>
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Testimonios</h2>
+            <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold text-slate-900">Voces de Confianza.</h3>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                text: "Excelente trabajo, muy profesionales y limpios. El acabado hermético realmente se nota en la durabilidad.",
+                text: "Excelente trabajo, muy profesionales y limpios. El acabado realmente se nota en la durabilidad.",
                 author: "Maria G.",
                 role: "Residencial"
               },
@@ -1044,20 +1019,20 @@ Espero su respuesta, gracias!`;
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-panel p-10 rounded-[2.5rem] border-slate-200 relative group hover:shadow-xl transition-all duration-500"
+                className="bg-white p-10 rounded-xl border border-[#e9ecef] relative group hover:shadow-xl transition-all duration-500"
               >
-                <Quote className="absolute top-8 right-8 w-12 h-12 text-blue-600/10 group-hover:text-blue-600/20 transition-colors" />
+                <Quote className="absolute top-8 right-8 w-12 h-12 text-[#3c6994]/10 group-hover:text-[#3c6994]/20 transition-colors" />
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={12} className="fill-blue-600 text-blue-600" />
+                    <Star key={i} size={12} className="fill-[#3c6994] text-[#3c6994]" />
                   ))}
                 </div>
-                <p className="text-slate-600 leading-relaxed italic mb-8 font-serif text-lg">
+                <p className="text-slate-600 leading-relaxed mb-8 font-medium text-lg">
                   "{item.text}"
                 </p>
                 <div>
                   <div className="font-bold text-sm uppercase tracking-widest text-slate-900">{item.author}</div>
-                  <div className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">{item.role}</div>
+                  <div className="text-[10px] text-slate-400 uppercase tracking-widest mt-1 font-bold">{item.role}</div>
                 </div>
               </motion.div>
             ))}
@@ -1066,11 +1041,11 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-32 bg-slate-50">
+      <section id="faq" className="py-32 bg-white">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-24">
-            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-blue-600 mb-6">Preguntas Frecuentes</h2>
-            <h3 className="font-serif text-[clamp(2.5rem,8vw,4rem)] italic text-slate-900">Despeja tus Dudas.</h3>
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Preguntas Frecuentes</h2>
+            <h3 className="font-sans text-[clamp(2.5rem,5vw,4rem)] font-extrabold text-slate-900">Despeja tus Dudas.</h3>
           </div>
           
           <div className="space-y-6">
@@ -1081,7 +1056,7 @@ Espero su respuesta, gracias!`;
               },
               {
                 q: "¿Qué marcas de pintura utilizan?",
-                a: "Trabajamos exclusivamente con marcas premium nacionales e internacionales con alta carga de sólidos para asegurar la durabilidad hermética."
+                a: "Trabajamos exclusivamente con marcas premium nacionales e internacionales con alta carga de sólidos para asegurar la durabilidad profesional."
               },
               {
                 q: "¿Ofrecen garantía por el trabajo?",
@@ -1092,18 +1067,18 @@ Espero su respuesta, gracias!`;
                 a: "Operamos principalmente en Central (Limpio, Asunción, Luque, etc.), pero realizamos proyectos de gran envergadura en todo el territorio nacional."
               }
             ].map((item, i) => (
-              <details key={i} className="group glass-panel rounded-3xl border-slate-200 overflow-hidden shadow-sm">
+              <details key={i} className="group bg-[#f8f9fa] rounded-xl border border-[#e9ecef] overflow-hidden shadow-sm">
                 <summary 
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
                   className="flex items-center justify-between p-8 cursor-pointer list-none bg-white"
                 >
                   <span className="font-bold text-sm uppercase tracking-widest pr-8 text-slate-900">{item.q}</span>
-                  <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-open:rotate-180 transition-transform">
+                  <div className="w-8 h-8 rounded-lg border border-[#e9ecef] flex items-center justify-center group-open:rotate-180 transition-transform">
                     <ChevronRight size={16} />
                   </div>
                 </summary>
-                <div className="px-8 pb-8 text-slate-500 text-sm leading-relaxed border-t border-slate-200 pt-6 bg-white">
+                <div className="px-8 pb-8 text-slate-600 text-sm leading-relaxed border-t border-[#e9ecef] pt-6 bg-[#f8f9fa] font-medium">
                   {item.a}
                 </div>
               </details>
@@ -1113,7 +1088,7 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Technical Stats Bar */}
-      <div className="bg-blue-600 py-3 overflow-hidden whitespace-nowrap border-y border-slate-900/10">
+      <div className="bg-[#3c6994] py-3 overflow-hidden whitespace-nowrap border-y border-[#3c6994]">
         <motion.div 
           animate={{ x: [0, -1000] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -1143,35 +1118,35 @@ Espero su respuesta, gracias!`;
       </div>
 
       {/* Footer - Architectural Style */}
-      <footer className="py-24 border-t border-slate-200 bg-white">
+      <footer className="py-24 border-t border-[#e9ecef] bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-16 mb-24">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs">PA</div>
-                <span className="font-serif text-xl tracking-tight font-medium text-slate-900">Pinturas & Acabados</span>
+                <div className="w-8 h-8 bg-[#3c6994] rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-lg shadow-[#3c6994]/20">PA</div>
+                <span className="font-sans text-xl tracking-tight font-extrabold text-slate-900 uppercase">Pinturas & Acabados</span>
               </div>
-              <p className="text-slate-500 text-sm leading-relaxed max-w-sm mb-4">
+              <p className="text-slate-500 text-sm leading-relaxed max-w-sm mb-4 font-medium">
                 Elevando el estándar de la pintura profesional a través de la técnica, 
-                la precisión y el compromiso con la durabilidad hermética.
+                la precisión y el compromiso con la calidad profesional.
               </p>
-              <div className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2">
+              <div className="text-xs font-bold uppercase tracking-widest text-[#3c6994] mb-2">
                 Director: Fabián Paul Sanabria
               </div>
-              <div className="text-[10px] uppercase tracking-widest text-slate-400">
+              <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
                 Isla Aranda, Limpio — Paraguay
               </div>
             </div>
             
             <div>
               <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-400 mb-8">Navegación</h5>
-            <ul className="space-y-4 text-sm font-medium">
-              <li><a href="#servicios" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-blue-600 transition-colors">Servicios</a></li>
-              <li><a href="#nosotros" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-blue-600 transition-colors">Nosotros</a></li>
-              <li><a href="#procesos" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-blue-600 transition-colors">Procesos</a></li>
-              <li><a href="#testimonios" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-blue-600 transition-colors">Testimonios</a></li>
-              <li><a href="#faq" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-blue-600 transition-colors">FAQ</a></li>
-              <li><a href="#contacto" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-blue-600 transition-colors">Contacto</a></li>
+            <ul className="space-y-4 text-sm font-bold">
+              <li><a href="#servicios" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-[#3c6994] transition-colors">Servicios</a></li>
+              <li><a href="#nosotros" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-[#3c6994] transition-colors">Nosotros</a></li>
+              <li><a href="#procesos" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-[#3c6994] transition-colors">Procesos</a></li>
+              <li><a href="#testimonios" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-[#3c6994] transition-colors">Testimonios</a></li>
+              <li><a href="#faq" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-[#3c6994] transition-colors">FAQ</a></li>
+              <li><a href="#contacto" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} className="text-slate-600 hover:text-[#3c6994] transition-colors">Contacto</a></li>
             </ul>
             </div>
 
@@ -1184,7 +1159,7 @@ Espero su respuesta, gracias!`;
                   rel="noopener noreferrer"
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-slate-600"
+                  className="w-12 h-12 rounded-lg border border-[#e9ecef] flex items-center justify-center hover:bg-[#3c6994] hover:text-white transition-all text-slate-600 shadow-sm"
                 >
                   <Facebook size={18} />
                 </a>
@@ -1192,7 +1167,7 @@ Espero su respuesta, gracias!`;
                   href="#" 
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-slate-600"
+                  className="w-12 h-12 rounded-lg border border-[#e9ecef] flex items-center justify-center hover:bg-[#3c6994] hover:text-white transition-all text-slate-600 shadow-sm"
                 >
                   <Instagram size={18} />
                 </a>
@@ -1200,7 +1175,7 @@ Espero su respuesta, gracias!`;
                   href="#" 
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
-                  className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all text-slate-600"
+                  className="w-12 h-12 rounded-lg border border-[#e9ecef] flex items-center justify-center hover:bg-[#3c6994] hover:text-white transition-all text-slate-600 shadow-sm"
                 >
                   <Linkedin size={18} />
                 </a>
@@ -1208,13 +1183,13 @@ Espero su respuesta, gracias!`;
             </div>
           </div>
           
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-slate-200">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-[#e9ecef]">
             <div className="text-[10px] uppercase tracking-widest font-bold text-slate-300">
               © 2024 Pinturas & Acabados Profesionales — Fabián Paul Sanabria
             </div>
             <div className="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-300">
-              <a href="#" className="hover:text-blue-600 transition-colors">Privacidad</a>
-              <a href="#" className="hover:text-blue-600 transition-colors">Términos</a>
+              <a href="#" className="hover:text-[#3c6994] transition-colors">Privacidad</a>
+              <a href="#" className="hover:text-[#3c6994] transition-colors">Términos</a>
             </div>
           </div>
         </div>
@@ -1253,7 +1228,7 @@ Espero su respuesta, gracias!`;
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        className="fixed bottom-28 right-10 z-[90] w-10 h-10 glass-panel rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-lg text-slate-600"
+        className="fixed bottom-28 right-10 z-[90] w-10 h-10 bg-white border border-[#e9ecef] rounded-lg flex items-center justify-center hover:bg-[#3c6994] hover:text-white transition-all shadow-lg text-slate-600"
       >
         <ArrowUp size={16} />
       </motion.button>
