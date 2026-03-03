@@ -719,14 +719,14 @@ Espero su respuesta, gracias!`;
             {[
               {
                 title: "Fachada Residencial",
-                before: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
-                after: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+                before: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=1000",
+                after: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=1000",
                 desc: "Restauración total con sellado hidrófugo y pintura de alta densidad."
               },
               {
                 title: "Interiores de Lujo",
-                before: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
-                after: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
+                before: "https://images.unsplash.com/photo-1616489953149-7597b53072a9?auto=format&fit=crop&q=80&w=1000",
+                after: "https://images.unsplash.com/photo-1616489953149-7597b53072a9?auto=format&fit=crop&q=80&w=1000",
                 desc: "Nivelación de muros con enduido plástico y acabado mate profundo."
               }
             ].map((project, i) => (
@@ -734,12 +734,22 @@ Espero su respuesta, gracias!`;
                 <div className="aspect-video rounded-xl overflow-hidden border border-[#e9ecef] relative group/ba shadow-xl">
                   <div className="absolute inset-0 flex">
                     <div className="w-1/2 h-full relative overflow-hidden border-r border-[#e9ecef]">
-                      <img src={project.before} alt="Before" className="w-full h-full object-cover grayscale" />
-                      <div className="absolute top-6 left-6 px-3 py-1 bg-slate-900/60 backdrop-blur-md rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Antes</div>
+                      <img 
+                        src={project.before} 
+                        alt="Before" 
+                        className="w-[200%] h-full object-cover grayscale brightness-75 contrast-125 sepia-[0.2]" 
+                        style={{ maxWidth: 'none' }}
+                      />
+                      <div className="absolute top-6 left-6 px-3 py-1 bg-slate-900/60 backdrop-blur-md rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Estado Inicial</div>
                     </div>
                     <div className="w-1/2 h-full relative overflow-hidden">
-                      <img src={project.after} alt="After" className="w-full h-full object-cover" />
-                      <div className="absolute top-6 right-6 px-3 py-1 bg-[#3c6994] rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Después</div>
+                      <img 
+                        src={project.after} 
+                        alt="After" 
+                        className="w-[200%] h-full object-cover -translate-x-1/2" 
+                        style={{ maxWidth: 'none' }}
+                      />
+                      <div className="absolute top-6 right-6 px-3 py-1 bg-[#3c6994] rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Resultado Final</div>
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60" />
