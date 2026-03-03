@@ -124,7 +124,7 @@ export default function App() {
   const whatsappLink = `https://wa.me/595984921554`;
 
   return (
-    <div ref={containerRef} className="relative bg-[#f8f9fa] text-slate-900 selection:bg-[#3c6994]/30 cursor-none">
+    <div ref={containerRef} className="relative bg-[#f8f9fa] text-slate-900 selection:bg-[#3c6994]/30 cursor-none overflow-x-hidden">
       {/* Custom Cursor */}
       <motion.div 
         className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#3c6994]/50 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
@@ -652,7 +652,7 @@ Espero su respuesta, gracias!`;
         )}
 
       {/* Technical Breakdown Section */}
-      <section className="py-32 relative bg-white border-y border-[#e9ecef]">
+      <section className="py-32 relative bg-white border-y border-[#e9ecef] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="order-2 lg:order-1">
@@ -764,7 +764,7 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* Service Area Section */}
-      <section className="py-32 relative bg-white">
+      <section className="py-32 relative bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-white rounded-xl border border-[#e9ecef] overflow-hidden shadow-xl">
             <div className="grid lg:grid-cols-2">
@@ -814,7 +814,7 @@ Espero su respuesta, gracias!`;
       </section>
 
       {/* About Us Section */}
-      <section id="nosotros" className="py-32 relative bg-[#f8f9fa]">
+      <section id="nosotros" className="py-32 relative bg-[#f8f9fa] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <motion.div
