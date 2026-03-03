@@ -9,25 +9,25 @@
 
 @layer base {
   body {
-    @apply bg-[#0a0a0a] text-white antialiased selection:bg-emerald-500/30;
+    @apply bg-[#f0f2f5] text-slate-900 antialiased selection:bg-blue-500/30;
   }
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/40;
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-800 to-slate-600;
 }
 
 .glass-panel {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  @apply bg-white border border-slate-200 shadow-sm;
 }
 
 .hermetic-border {
-  @apply border border-white/10 relative overflow-hidden;
+  @apply border border-slate-200 relative overflow-hidden;
 }
 
 .hermetic-border::after {
   content: '';
-  @apply absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-transparent opacity-0 transition-opacity duration-500;
+  @apply absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-transparent opacity-0 transition-opacity duration-500;
 }
 
 .hermetic-border:hover::after {
