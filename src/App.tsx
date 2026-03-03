@@ -42,7 +42,7 @@ const services = [
     title: "Pintura Interior & Exterior",
     description: "Pintor de confianza para acabados de lujo en interiores y exteriores con pigmentos de máxima durabilidad.",
     icon: <Paintbrush className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=800",
     details: {
       features: ["Pigmentos de alta resistencia UV", "Acabado lavable y antimanchas", "Trabajo fino y responsable"],
       process: ["Limpieza profunda de superficie", "Aplicación de imprimante sellador", "Doble capa de pintura premium"],
@@ -54,7 +54,7 @@ const services = [
     title: "Texturado & Enduido",
     description: "Preparación técnica de superficies con enduido plástico para una planimetría perfecta y texturas artesanales.",
     icon: <Layers className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1562664377-709f2c337eb2?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&q=80&w=800",
     details: {
       features: ["Nivelación milimétrica con enduido", "Texturas personalizadas (Travertino, Rulato, etc.)", "Ocultamiento total de imperfecciones"],
       process: ["Lijado mecánico de base", "Aplicación de enduido plástico", "Texturado artesanal con llana"],
@@ -66,7 +66,7 @@ const services = [
     title: "Impermeabilizado",
     description: "Sistemas de sellado hermético y pintura impermeabilizante para protección total contra agentes climáticos.",
     icon: <Droplets className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1635424710928-0544e8512eae?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800",
     details: {
       features: ["Membrana líquida de alta elasticidad", "Sellado de microfisuras", "Barrera 100% hidrófuga"],
       process: ["Reparación de grietas existentes", "Aplicación de base adherente", "Triple capa cruzada de impermeabilizante"],
@@ -296,21 +296,10 @@ export default function App() {
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[#e9ecef] shadow-2xl">
                   <img 
                     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" 
-                    alt="Luxury Interior"
+                    alt="Ekopia High-End Finish"
                     className="w-full h-full object-cover transition-all duration-700"
                     referrerPolicy="no-referrer"
                   />
-                </div>
-                <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl border border-[#e9ecef] shadow-xl">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#3c6994]/10 rounded-lg flex items-center justify-center text-[#3c6994]">
-                      <Award size={24} />
-                    </div>
-                    <div>
-                      <div className="text-xl font-bold text-slate-900">Certificado</div>
-                      <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Calidad Premium</div>
-                    </div>
-                  </div>
                 </div>
               </motion.div>
             </div>
@@ -536,7 +525,12 @@ Espero su respuesta, gracias!`;
                 
                 {/* Image Overlay on Hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover" 
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
               </motion.div>
             ))}
@@ -719,14 +713,14 @@ Espero su respuesta, gracias!`;
             {[
               {
                 title: "Fachada Residencial",
-                before: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=1000",
-                after: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=1000",
+                before: "https://images.unsplash.com/photo-1513584684374-8bdb74838a0f?auto=format&fit=crop&q=80&w=1000",
+                after: "https://images.unsplash.com/photo-1513584684374-8bdb74838a0f?auto=format&fit=crop&q=80&w=1000",
                 desc: "Restauración total con sellado hidrófugo y pintura de alta densidad."
               },
               {
                 title: "Interiores de Lujo",
-                before: "https://images.unsplash.com/photo-1616489953149-7597b53072a9?auto=format&fit=crop&q=80&w=1000",
-                after: "https://images.unsplash.com/photo-1616489953149-7597b53072a9?auto=format&fit=crop&q=80&w=1000",
+                before: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1000",
+                after: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1000",
                 desc: "Nivelación de muros con enduido plástico y acabado mate profundo."
               }
             ].map((project, i) => (
@@ -739,6 +733,7 @@ Espero su respuesta, gracias!`;
                         alt="Before" 
                         className="w-[200%] h-full object-cover grayscale brightness-75 contrast-125 sepia-[0.2]" 
                         style={{ maxWidth: 'none' }}
+                        referrerPolicy="no-referrer"
                       />
                       <div className="absolute top-6 left-6 px-3 py-1 bg-slate-900/60 backdrop-blur-md rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Estado Inicial</div>
                     </div>
@@ -748,6 +743,7 @@ Espero su respuesta, gracias!`;
                         alt="After" 
                         className="w-[200%] h-full object-cover -translate-x-1/2" 
                         style={{ maxWidth: 'none' }}
+                        referrerPolicy="no-referrer"
                       />
                       <div className="absolute top-6 right-6 px-3 py-1 bg-[#3c6994] rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Resultado Final</div>
                     </div>
@@ -935,8 +931,8 @@ Espero su respuesta, gracias!`;
                 <div className="absolute inset-0 bg-[#3c6994]/5 animate-pulse" />
                 <div className="relative h-full w-full rounded-lg overflow-hidden border border-[#e9ecef]">
                   <img 
-                    src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=1000" 
-                    alt="Technical Work"
+                    src="https://images.unsplash.com/photo-1525909002-1b05e0c869d8?auto=format&fit=crop&q=80&w=1000" 
+                    alt="Technical Painting Tools"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
