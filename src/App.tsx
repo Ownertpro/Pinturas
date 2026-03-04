@@ -280,7 +280,7 @@ export default function App() {
                 </h1>
                 <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl font-medium">
                   Especialistas responsables en la aplicación técnica de recubrimientos premium: 
-                  texturado, enduido, pintura epoxi e impermeabilizados de alta gama.
+                  texturado, enduido, pintura epoxi e impermeabilizados con acabados finos.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a 
@@ -732,12 +732,12 @@ Espero su respuesta, gracias!`;
       <section id="galeria" className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Portafolio HD</h2>
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Portafolio de Excelencia</h2>
             <h3 className="font-sans text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-slate-900">
-              Nuestros Trabajos en <span className="text-[#3c6994]">Alta Definición.</span>
+              Nuestros Trabajos en <span className="text-[#3c6994]">Acabados Finos.</span>
             </h3>
             <p className="mt-6 text-slate-500 max-w-xl mx-auto text-sm font-medium">
-              Haz clic en cualquier imagen para abrir el visor HD y apreciar la calidad de terminación original.
+              Haz clic en cualquier imagen para abrir el visor de detalle y apreciar la calidad de terminación original.
             </p>
           </div>
 
@@ -766,7 +766,7 @@ Espero su respuesta, gracias!`;
                   <h4 className="text-white font-bold text-lg">{image.title}</h4>
                   <div className="mt-4 flex items-center gap-2 text-white/70 text-[10px] uppercase tracking-widest font-bold">
                     <Maximize2 size={12} />
-                    Ver en HD
+                    Ver Detalle
                   </div>
                 </div>
               </motion.div>
@@ -826,11 +826,11 @@ Espero su respuesta, gracias!`;
                 referrerPolicy="no-referrer"
               />
               <div className="mt-10 text-center">
-                <div className="text-[#3c6994] text-[10px] uppercase tracking-[0.6em] font-bold mb-3">Ekopia Original HD</div>
+                <div className="text-[#3c6994] text-[10px] uppercase tracking-[0.6em] font-bold mb-3">Ekopia Acabados Finos</div>
                 <h4 className="text-white text-2xl md:text-3xl font-bold tracking-tight">{galleryImages[selectedImageIndex].title}</h4>
                 <div className="mt-4 flex items-center justify-center gap-4">
                   <div className="h-[1px] w-12 bg-white/10" />
-                  <p className="text-white/30 text-xs uppercase tracking-widest font-medium">Visualización 100% Nítida</p>
+                  <p className="text-white/30 text-xs uppercase tracking-widest font-medium">Terminación de Excelencia</p>
                   <div className="h-[1px] w-12 bg-white/10" />
                 </div>
               </div>
