@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { 
   Paintbrush, 
   Layers, 
@@ -18,10 +18,12 @@ import {
   Instagram,
   Facebook,
   Maximize,
+  Maximize2,
   Scan,
   Zap,
   Clock,
   MapPin,
+  ChevronLeft,
   ChevronRight,
   Share2,
   Linkedin,
@@ -36,13 +38,43 @@ import {
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
+const galleryImages = [
+  { id: 1, url: "https://i.ibb.co/9kqqrrWN/IMG-20210803-162931.jpg", title: "Acabado Exterior" },
+  { id: 2, url: "https://i.ibb.co/1f3Dh1Qg/20230331-092808.jpg", title: "Texturado en Muros" },
+  { id: 3, url: "https://i.ibb.co/cXvd41J0/20230331-092754.jpg", title: "Preparación de Superficie" },
+  { id: 4, url: "https://i.ibb.co/p6wzLZGT/20221108-160612.jpg", title: "Pintura de Fachada" },
+  { id: 5, url: "https://i.ibb.co/DPsD1zB4/20230626-115604.jpg", title: "Impermeabilización" },
+  { id: 6, url: "https://i.ibb.co/zHP9Q2kC/FB-IMG-1675023495350.jpg", title: "Detalle de Terminación" },
+  { id: 7, url: "https://i.ibb.co/1J6GvhYH/FB-IMG-1675023509417.jpg", title: "Obra Residencial" },
+  { id: 8, url: "https://i.ibb.co/jn1Kj89/FB-IMG-1675023455496.jpg", title: "Pintura Interior" },
+  { id: 9, url: "https://i.ibb.co/pBkWzt3q/FB-IMG-1675023466134.jpg", title: "Acabado Premium" },
+  { id: 10, url: "https://i.ibb.co/dw1JF40S/20221108-160349.jpg", title: "Renovación de Muros" },
+  { id: 11, url: "https://i.ibb.co/dJ22MtY8/20230222-145441.jpg", title: "Tratamiento de Humedad" },
+  { id: 12, url: "https://i.ibb.co/KzQ6wf4w/20230331-092732.jpg", title: "Planimetría Perfecta" },
+  { id: 13, url: "https://i.ibb.co/VYDjBfk9/20230114-154625.jpg", title: "Pintura Epoxi" },
+  { id: 14, url: "https://i.ibb.co/PvLz39tx/20230626-115530.jpg", title: "Protección Climática" },
+  { id: 15, url: "https://i.ibb.co/gZPbY64g/FB-IMG-1675023474269.jpg", title: "Estética de Lujo" },
+  { id: 16, url: "https://i.ibb.co/CK9kgwP3/20230331-092801.jpg", title: "Enduido Técnico" },
+  { id: 17, url: "https://i.ibb.co/jZZHQDdN/20221108-160428.jpg", title: "Fachada Renovada" },
+  { id: 18, url: "https://i.ibb.co/k2Trb9zw/20230605-071817.jpg", title: "Pintura de Altura" },
+  { id: 19, url: "https://i.ibb.co/G4ySTr9T/20221119-135750.jpg", title: "Resultado Final" },
+  { id: 20, url: "https://i.ibb.co/hJ3WL68W/20230314-105258.jpg", title: "Obra en Proceso" },
+  { id: 21, url: "https://i.ibb.co/9LtKW8M/20221108-110313.jpg", title: "Limpieza de Obra" },
+  { id: 22, url: "https://i.ibb.co/fVWsVQ67/20221119-135744.jpg", title: "Antes de Pintar" },
+  { id: 23, url: "https://i.ibb.co/BHn3xjLK/20230313-101329.jpg", title: "Preparación Técnica" },
+  { id: 24, url: "https://i.ibb.co/MDR0qhQ8/20221117-174053.jpg", title: "Acabado de Fachada" },
+  { id: 25, url: "https://i.ibb.co/S4ypw9SK/20221119-135822.jpg", title: "Detalle de Obra" },
+  { id: 26, url: "https://i.ibb.co/YThHjhRF/20221108-110244.jpg", title: "Pintura de Muros" },
+  { id: 27, url: "https://i.ibb.co/KzSnkZzY/20221108-160522.jpg", title: "Terminación Profesional" }
+];
+
 const services = [
   {
     id: "01",
     title: "Pintura Interior & Exterior",
     description: "Pintor de confianza para acabados de lujo en interiores y exteriores con pigmentos de máxima durabilidad.",
     icon: <Paintbrush className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=800",
+    image: "https://i.ibb.co/jn1Kj89/FB-IMG-1675023455496.jpg",
     details: {
       features: ["Pigmentos de alta resistencia UV", "Acabado lavable y antimanchas", "Trabajo fino y responsable"],
       process: ["Limpieza profunda de superficie", "Aplicación de imprimante sellador", "Doble capa de pintura premium"],
@@ -54,7 +86,7 @@ const services = [
     title: "Texturado & Enduido",
     description: "Preparación técnica de superficies con enduido plástico para una planimetría perfecta y texturas artesanales.",
     icon: <Layers className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1615873968403-89e068629265?auto=format&fit=crop&q=80&w=800",
+    image: "https://i.ibb.co/1f3Dh1Qg/20230331-092808.jpg",
     details: {
       features: ["Nivelación milimétrica con enduido", "Texturas personalizadas (Travertino, Rulato, etc.)", "Ocultamiento total de imperfecciones"],
       process: ["Lijado mecánico de base", "Aplicación de enduido plástico", "Texturado artesanal con llana"],
@@ -66,7 +98,7 @@ const services = [
     title: "Impermeabilizado",
     description: "Sistemas de sellado hermético y pintura impermeabilizante para protección total contra agentes climáticos.",
     icon: <Droplets className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800",
+    image: "https://i.ibb.co/DPsD1zB4/20230626-115604.jpg",
     details: {
       features: ["Membrana líquida de alta elasticidad", "Sellado de microfisuras", "Barrera 100% hidrófuga"],
       process: ["Reparación de grietas existentes", "Aplicación de base adherente", "Triple capa cruzada de impermeabilizante"],
@@ -78,7 +110,7 @@ const services = [
     title: "Pintura Epoxi & Barnices",
     description: "Tratamientos de protección con pintura epoxi de alta resistencia y barnices de alto brillo o mate profundo.",
     icon: <Sparkles className="w-5 h-5" />,
-    image: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=800",
+    image: "https://i.ibb.co/VYDjBfk9/20230114-154625.jpg",
     details: {
       features: ["Pintura epoxi de alta resistencia", "Realce natural de vetas en madera", "Acabados espejo o mate profundo"],
       process: ["Pulido fino de superficie", "Descontaminación total", "Aplicación controlada de resina/barniz"],
@@ -96,6 +128,7 @@ export default function App() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [notification, setNotification] = useState<{ city: string, time: string } | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const cities = ["Limpio", "Asunción", "Luque", "Mariano R. Alonso", "San Lorenzo", "Lambaré"];
@@ -144,8 +177,6 @@ export default function App() {
         className="fixed top-0 left-0 right-0 h-1 bg-[#3c6994] origin-left z-[100]"
         style={{ scaleX }}
       />
-
-      <div className="fixed inset-0 noise-bg pointer-events-none z-50" />
       
       {/* Live Notification Toast */}
       <motion.div 
@@ -181,10 +212,10 @@ export default function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            {["Servicios", "Nosotros", "Procesos", "Testimonios", "FAQ", "Presupuesto"].map((item) => (
+            {["Servicios", "Galería", "Nosotros", "Procesos", "Testimonios", "FAQ", "Presupuesto"].map((item) => (
               <a 
                 key={item}
-                href={`#${item.toLowerCase() === 'presupuesto' ? 'contacto' : item.toLowerCase()}`} 
+                href={`#${item.toLowerCase() === 'presupuesto' ? 'contacto' : item.toLowerCase() === 'galería' ? 'galeria' : item.toLowerCase()}`} 
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 className="text-xs uppercase tracking-wider font-bold text-slate-600 hover:text-[#3c6994] transition-colors"
@@ -208,6 +239,7 @@ export default function App() {
           >
             <div className="flex flex-col gap-6">
               <a href="#servicios" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Servicios</a>
+              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Galería</a>
               <a href="#nosotros" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Nosotros</a>
               <a href="#procesos" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Procesos</a>
               <a href="#testimonios" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold text-slate-900">Testimonios</a>
@@ -293,11 +325,12 @@ export default function App() {
                 transition={{ duration: 0.8 }}
                 className="relative"
               >
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[#e9ecef] shadow-2xl">
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[#e9ecef] shadow-2xl bg-white">
                   <img 
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" 
+                    src="https://i.ibb.co/1J6GvhYH/FB-IMG-1675023509417.jpg" 
                     alt="Ekopia High-End Finish"
                     className="w-full h-full object-cover transition-all duration-700"
+                    loading="eager"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -529,6 +562,7 @@ Espero su respuesta, gracias!`;
                     src={service.image} 
                     alt={service.title} 
                     className="w-full h-full object-cover" 
+                    loading="lazy"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -561,11 +595,12 @@ Espero su respuesta, gracias!`;
               <X size={20} />
             </button>
 
-            <div className="lg:w-1/2 relative min-h-[250px] lg:min-h-full">
+            <div className="lg:w-1/2 relative min-h-[250px] lg:min-h-full bg-slate-100">
               <img 
                 src={selectedService.image} 
                 alt={selectedService.title} 
                 className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
@@ -693,81 +728,116 @@ Espero su respuesta, gracias!`;
         </div>
       </section>
 
-      {/* Before & After Section */}
-      <section className="py-32 relative overflow-hidden bg-[#f8f9fa]">
+      {/* Full Gallery Section */}
+      <section id="galeria" className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-            <div className="max-w-2xl">
-              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Resultados Reales</h2>
-              <h3 className="font-sans text-[clamp(1.8rem,5vw,4.5rem)] font-extrabold leading-none tracking-tight text-slate-900">
-                El Poder de la <br />
-                <span className="text-[#3c6994]">Transformación.</span>
-              </h3>
-            </div>
-            <p className="text-slate-500 max-w-xs text-sm leading-relaxed font-medium">
-              Visualiza el impacto de nuestro estándar de calidad profesional en proyectos reales.
+          <div className="text-center mb-24">
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Portafolio HD</h2>
+            <h3 className="font-sans text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-slate-900">
+              Nuestros Trabajos en <span className="text-[#3c6994]">Alta Definición.</span>
+            </h3>
+            <p className="mt-6 text-slate-500 max-w-xl mx-auto text-sm font-medium">
+              Haz clic en cualquier imagen para abrir el visor HD y apreciar la calidad de terminación original.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {[
-              {
-                title: "Fachada Residencial",
-                before: "https://images.unsplash.com/photo-1513584684374-8bdb74838a0f?auto=format&fit=crop&q=80&w=1000",
-                after: "https://images.unsplash.com/photo-1513584684374-8bdb74838a0f?auto=format&fit=crop&q=80&w=1000",
-                desc: "Restauración total con sellado hidrófugo y pintura de alta densidad."
-              },
-              {
-                title: "Interiores de Lujo",
-                before: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1000",
-                after: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=1000",
-                desc: "Nivelación de muros con enduido plástico y acabado mate profundo."
-              }
-            ].map((project, i) => (
-              <div key={i} className="group relative">
-                <div className="aspect-video rounded-xl overflow-hidden border border-[#e9ecef] relative group/ba shadow-xl">
-                  <div className="absolute inset-0 flex">
-                    <div className="w-1/2 h-full relative overflow-hidden border-r border-[#e9ecef]">
-                      <img 
-                        src={project.before} 
-                        alt="Before" 
-                        className="w-[200%] h-full object-cover grayscale brightness-75 contrast-125 sepia-[0.2]" 
-                        style={{ maxWidth: 'none' }}
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute top-6 left-6 px-3 py-1 bg-slate-900/60 backdrop-blur-md rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Estado Inicial</div>
-                    </div>
-                    <div className="w-1/2 h-full relative overflow-hidden">
-                      <img 
-                        src={project.after} 
-                        alt="After" 
-                        className="w-[200%] h-full object-cover -translate-x-1/2" 
-                        style={{ maxWidth: 'none' }}
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute top-6 right-6 px-3 py-1 bg-[#3c6994] rounded-md text-[8px] uppercase tracking-widest font-bold text-white">Resultado Final</div>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60" />
-                  
-                  {/* Technical HUD Overlay */}
-                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover/ba:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 border-[20px] border-[#3c6994]/5" />
-                    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#3c6994]/20 animate-scan" />
-                    <div className="absolute bottom-12 left-12 font-mono text-[8px] text-[#3c6994] uppercase tracking-widest">
-                      Delta Analysis: +42% Durability
-                    </div>
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+            {galleryImages.map((image, i) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: (i % 4) * 0.05 }}
+                viewport={{ once: true }}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                onClick={() => setSelectedImageIndex(i)}
+                className="relative group overflow-hidden rounded-xl border border-[#e9ecef] bg-white break-inside-avoid shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer"
+              >
+                <img 
+                  src={image.url} 
+                  alt={image.title} 
+                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994] mb-2">Proyecto Realizado</div>
+                  <h4 className="text-white font-bold text-lg">{image.title}</h4>
+                  <div className="mt-4 flex items-center gap-2 text-white/70 text-[10px] uppercase tracking-widest font-bold">
+                    <Maximize2 size={12} />
+                    Ver en HD
                   </div>
                 </div>
-                <div className="mt-8 px-4">
-                  <h4 className="text-xl font-bold mb-2 text-slate-900">{project.title}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed font-medium">{project.desc}</p>
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImageIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[10000] bg-slate-950/98 backdrop-blur-2xl flex items-center justify-center p-4 md:p-12"
+            onClick={() => setSelectedImageIndex(null)}
+          >
+            <button 
+              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors z-10 p-2 bg-white/5 rounded-full backdrop-blur-md"
+              onClick={() => setSelectedImageIndex(null)}
+            >
+              <X size={24} />
+            </button>
+
+            <button 
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-10 p-4 bg-white/5 rounded-full backdrop-blur-md"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImageIndex((prev) => (prev !== null ? (prev - 1 + galleryImages.length) % galleryImages.length : null));
+              }}
+            >
+              <ChevronLeft size={32} />
+            </button>
+
+            <button 
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-10 p-4 bg-white/5 rounded-full backdrop-blur-md"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImageIndex((prev) => (prev !== null ? (prev + 1) % galleryImages.length : null));
+              }}
+            >
+              <ChevronRight size={32} />
+            </button>
+
+            <motion.div
+              key={selectedImageIndex}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="relative max-w-full max-h-full flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={galleryImages[selectedImageIndex].url} 
+                alt={galleryImages[selectedImageIndex].title}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10"
+                referrerPolicy="no-referrer"
+              />
+              <div className="mt-10 text-center">
+                <div className="text-[#3c6994] text-[10px] uppercase tracking-[0.6em] font-bold mb-3">Ekopia Original HD</div>
+                <h4 className="text-white text-2xl md:text-3xl font-bold tracking-tight">{galleryImages[selectedImageIndex].title}</h4>
+                <div className="mt-4 flex items-center justify-center gap-4">
+                  <div className="h-[1px] w-12 bg-white/10" />
+                  <p className="text-white/30 text-xs uppercase tracking-widest font-medium">Visualización 100% Nítida</p>
+                  <div className="h-[1px] w-12 bg-white/10" />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Service Area Section */}
       <section className="py-32 relative bg-white overflow-hidden">
@@ -929,11 +999,12 @@ Espero su respuesta, gracias!`;
             <div className="relative">
               <div className="aspect-square rounded-xl border border-[#e9ecef] p-4 relative overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-[#3c6994]/5 animate-pulse" />
-                <div className="relative h-full w-full rounded-lg overflow-hidden border border-[#e9ecef]">
+                <div className="relative h-full w-full rounded-lg overflow-hidden border border-[#e9ecef] bg-slate-50">
                   <img 
-                    src="https://images.unsplash.com/photo-1525909002-1b05e0c869d8?auto=format&fit=crop&q=80&w=1000" 
+                    src="https://i.ibb.co/zHP9Q2kC/FB-IMG-1675023495350.jpg" 
                     alt="Technical Painting Tools"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
