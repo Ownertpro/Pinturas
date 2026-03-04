@@ -34,7 +34,13 @@ import {
   Users,
   Quote,
   ArrowLeft,
-  ArrowRight
+  ArrowRight,
+  ClipboardCheck,
+  Search,
+  User,
+  MessageSquare,
+  FileSearch,
+  ShieldAlert
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -884,6 +890,171 @@ Espero su respuesta, gracias!`;
                   <div className="w-3/4 h-3/4 bg-[#3c6994]/10 blur-[80px] rounded-full" />
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quality Audit Section - Persuasive Interaction */}
+      <section id="auditoria" className="py-32 relative bg-slate-950 overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#3c6994] blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#3c6994] blur-[120px] rounded-full" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Control de Excelencia</h2>
+            <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-none tracking-tight text-white">
+              Auditoría de <span className="text-[#3c6994]">Calidad.</span>
+            </h3>
+            <p className="mt-8 text-slate-400 max-w-2xl mx-auto text-lg font-medium">
+              No solo prometemos resultados; los auditamos. Mira cómo garantizamos que cada centímetro de tu obra cumpla con el estándar Ekopia.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
+            {/* Left: Technical Checklist */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-5 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 md:p-10"
+            >
+              <div className="flex items-center gap-4 mb-10">
+                <div className="w-12 h-12 rounded-lg bg-[#3c6994]/20 flex items-center justify-center text-[#3c6994]">
+                  <ClipboardCheck size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-xl">Protocolo de Inspección</h4>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest font-bold mt-1">Ref: EK-QA-2024</p>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                {[
+                  { label: "Adherencia de Base", status: "Certificado", detail: "Prueba de tracción superada en sustrato seco." },
+                  { label: "Planimetría de Muros", status: "Nivelado", detail: "Desviación menor a 0.5mm por metro lineal." },
+                  { label: "Espesor de Capa", status: "Óptimo", detail: "Micraje verificado según ficha técnica del fabricante." },
+                  { label: "Resistencia UV", status: "Verificado", detail: "Pigmentación con filtro solar de alta densidad." },
+                  { label: "Limpieza de Obra", status: "Impecable", detail: "Retiro total de excedentes y protección de aberturas." }
+                ].map((item, i) => (
+                  <div key={i} className="group">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-slate-300 font-bold text-sm">{item.label}</span>
+                      <span className="text-[#3c6994] text-[10px] font-black uppercase tracking-widest bg-[#3c6994]/10 px-2 py-1 rounded">{item.status}</span>
+                    </div>
+                    <p className="text-slate-500 text-xs leading-relaxed">{item.detail}</p>
+                    <div className="mt-4 h-[1px] w-full bg-white/5 group-last:hidden" />
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-12 p-6 rounded-xl bg-[#3c6994]/10 border border-[#3c6994]/20">
+                <div className="flex items-center gap-3 text-[#3c6994] mb-2">
+                  <ShieldAlert size={16} />
+                  <span className="text-[10px] uppercase tracking-widest font-black">Nota del Auditor</span>
+                </div>
+                <p className="text-slate-400 text-xs italic leading-relaxed">
+                  "La preparación de superficie en este proyecto superó los estándares básicos. El sellado previo garantiza una vida útil de +10 años sin desprendimientos."
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Right: Dialogue / Persuasion */}
+            <div className="lg:col-span-7 space-y-8">
+              {/* Dialogue Box 1: Inspector */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex gap-6 items-start"
+              >
+                <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 border-[#3c6994] p-1">
+                  <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-white">
+                    <User size={24} />
+                  </div>
+                </div>
+                <div className="bg-white p-8 rounded-2xl rounded-tl-none shadow-2xl relative">
+                  <div className="absolute -left-3 top-0 w-6 h-6 bg-white rotate-45" />
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994] mb-2">Inspector Técnico</div>
+                  <p className="text-slate-700 font-medium leading-relaxed">
+                    "Sra. Elena, hemos finalizado la auditoría de la fachada. Como puede observar en el micrómetro, la capa de impermeabilizante tiene el espesor exacto para resistir las tormentas de verano. No hay un solo poro abierto."
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Dialogue Box 2: Client */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex gap-6 items-start flex-row-reverse"
+              >
+                <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 border-slate-400 p-1">
+                  <div className="w-full h-full rounded-full bg-slate-200 flex items-center justify-center text-slate-600">
+                    <Users size={24} />
+                  </div>
+                </div>
+                <div className="bg-slate-100 p-8 rounded-2xl rounded-tr-none shadow-xl relative">
+                  <div className="absolute -right-3 top-0 w-6 h-6 bg-slate-100 rotate-45" />
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-2">Cliente Satisfecho</div>
+                  <p className="text-slate-700 font-medium leading-relaxed italic">
+                    "Lo que más me impresiona es la terminación de los marcos. Otros pintores suelen dejar manchas, pero aquí el corte es quirúrgico. Me da mucha tranquilidad saber que usaron los materiales que presupuestaron."
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Dialogue Box 3: Inspector Conclusion */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                viewport={{ once: true }}
+                className="flex gap-6 items-start"
+              >
+                <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 border-2 border-[#3c6994] p-1">
+                  <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-white">
+                    <User size={24} />
+                  </div>
+                </div>
+                <div className="bg-[#3c6994] p-8 rounded-2xl rounded-tl-none shadow-2xl relative text-white">
+                  <div className="absolute -left-3 top-0 w-6 h-6 bg-[#3c6994] rotate-45" />
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-white/60 mb-2">Conclusión de Auditoría</div>
+                  <p className="text-lg font-bold leading-relaxed">
+                    "Ese es el estándar Ekopia. No solo pintamos para que se vea bien hoy, sino para que su inversión esté protegida por años. Obra certificada y lista para entrega."
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Final Persuasion Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="mt-12 p-10 rounded-3xl bg-gradient-to-br from-[#3c6994] to-[#2a4a69] text-white shadow-2xl relative overflow-hidden group"
+              >
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+                  <FileSearch size={120} />
+                </div>
+                <div className="relative z-10">
+                  <h4 className="text-3xl font-extrabold mb-6 leading-tight">¿Quieres este nivel de <br />rigor en tu proyecto?</h4>
+                  <p className="text-white/80 mb-10 max-w-md font-medium">
+                    Evita sorpresas y presupuestos que cambian a mitad de camino. Trabajamos con transparencia técnica total.
+                  </p>
+                  <a 
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-4 bg-white text-[#3c6994] px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-all shadow-xl"
+                  >
+                    Solicitar Auditoría Gratuita
+                    <ArrowUpRight size={18} />
+                  </a>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
