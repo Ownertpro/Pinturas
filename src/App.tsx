@@ -45,33 +45,52 @@ import {
 import { useState, useRef, useEffect } from "react";
 
 const galleryImages = [
-  { id: 1, url: "https://i.ibb.co/9kqqrrWN/IMG-20210803-162931.jpg", title: "Acabado Exterior" },
-  { id: 2, url: "https://i.ibb.co/1f3Dh1Qg/20230331-092808.jpg", title: "Texturado en Muros" },
-  { id: 3, url: "https://i.ibb.co/cXvd41J0/20230331-092754.jpg", title: "Preparación de Superficie" },
-  { id: 4, url: "https://i.ibb.co/p6wzLZGT/20221108-160612.jpg", title: "Pintura de Fachada" },
-  { id: 5, url: "https://i.ibb.co/DPsD1zB4/20230626-115604.jpg", title: "Impermeabilización" },
-  { id: 6, url: "https://i.ibb.co/zHP9Q2kC/FB-IMG-1675023495350.jpg", title: "Detalle de Terminación" },
-  { id: 7, url: "https://i.ibb.co/1J6GvhYH/FB-IMG-1675023509417.jpg", title: "Obra Residencial" },
-  { id: 8, url: "https://i.ibb.co/jn1Kj89/FB-IMG-1675023455496.jpg", title: "Pintura Interior" },
-  { id: 9, url: "https://i.ibb.co/pBkWzt3q/FB-IMG-1675023466134.jpg", title: "Acabado Premium" },
-  { id: 10, url: "https://i.ibb.co/dw1JF40S/20221108-160349.jpg", title: "Renovación de Muros" },
-  { id: 11, url: "https://i.ibb.co/dJ22MtY8/20230222-145441.jpg", title: "Tratamiento de Humedad" },
-  { id: 12, url: "https://i.ibb.co/KzQ6wf4w/20230331-092732.jpg", title: "Planimetría Perfecta" },
-  { id: 13, url: "https://i.ibb.co/VYDjBfk9/20230114-154625.jpg", title: "Pintura Epoxi" },
-  { id: 14, url: "https://i.ibb.co/PvLz39tx/20230626-115530.jpg", title: "Protección Climática" },
-  { id: 15, url: "https://i.ibb.co/gZPbY64g/FB-IMG-1675023474269.jpg", title: "Estética de Lujo" },
-  { id: 16, url: "https://i.ibb.co/CK9kgwP3/20230331-092801.jpg", title: "Enduido Técnico" },
-  { id: 17, url: "https://i.ibb.co/jZZHQDdN/20221108-160428.jpg", title: "Fachada Renovada" },
-  { id: 18, url: "https://i.ibb.co/k2Trb9zw/20230605-071817.jpg", title: "Pintura de Altura" },
-  { id: 19, url: "https://i.ibb.co/G4ySTr9T/20221119-135750.jpg", title: "Resultado Final" },
-  { id: 20, url: "https://i.ibb.co/hJ3WL68W/20230314-105258.jpg", title: "Obra en Proceso" },
-  { id: 21, url: "https://i.ibb.co/9LtKW8M/20221108-110313.jpg", title: "Limpieza de Obra" },
-  { id: 22, url: "https://i.ibb.co/fVWsVQ67/20221119-135744.jpg", title: "Antes de Pintar" },
-  { id: 23, url: "https://i.ibb.co/BHn3xjLK/20230313-101329.jpg", title: "Preparación Técnica" },
-  { id: 24, url: "https://i.ibb.co/MDR0qhQ8/20221117-174053.jpg", title: "Acabado de Fachada" },
-  { id: 25, url: "https://i.ibb.co/S4ypw9SK/20221119-135822.jpg", title: "Detalle de Obra" },
-  { id: 26, url: "https://i.ibb.co/YThHjhRF/20221108-110244.jpg", title: "Pintura de Muros" },
-  { id: 27, url: "https://i.ibb.co/KzSnkZzY/20221108-160522.jpg", title: "Terminación Profesional" }
+  { id: 1, url: "https://i.ibb.co/9kqqrrWN/IMG-20210803-162931.jpg", title: "Acabado Exterior", category: "Exterior" },
+  { id: 2, url: "https://i.ibb.co/1f3Dh1Qg/20230331-092808.jpg", title: "Texturado en Muros", category: "Texturado" },
+  { id: 3, url: "https://i.ibb.co/cXvd41J0/20230331-092754.jpg", title: "Preparación de Superficie", category: "Preparación" },
+  { id: 4, url: "https://i.ibb.co/p6wzLZGT/20221108-160612.jpg", title: "Pintura de Fachada", category: "Exterior" },
+  { id: 5, url: "https://i.ibb.co/DPsD1zB4/20230626-115604.jpg", title: "Impermeabilización", category: "Impermeabilizado" },
+  { id: 6, url: "https://i.ibb.co/zHP9Q2kC/FB-IMG-1675023495350.jpg", title: "Detalle de Terminación", category: "Interior" },
+  { id: 7, url: "https://i.ibb.co/1J6GvhYH/FB-IMG-1675023509417.jpg", title: "Obra Residencial", category: "Exterior" },
+  { id: 8, url: "https://i.ibb.co/jn1Kj89/FB-IMG-1675023455496.jpg", title: "Pintura Interior", category: "Interior" },
+  { id: 9, url: "https://i.ibb.co/pBkWzt3q/FB-IMG-1675023466134.jpg", title: "Acabado Premium", category: "Interior" },
+  { id: 10, url: "https://i.ibb.co/dw1JF40S/20221108-160349.jpg", title: "Renovación de Muros", category: "Interior" },
+  { id: 11, url: "https://i.ibb.co/dJ22MtY8/20230222-145441.jpg", title: "Tratamiento de Humedad", category: "Preparación" },
+  { id: 12, url: "https://i.ibb.co/KzQ6wf4w/20230331-092732.jpg", title: "Planimetría Perfecta", category: "Texturado" },
+  { id: 13, url: "https://i.ibb.co/VYDjBfk9/20230114-154625.jpg", title: "Pintura Epoxi", category: "Especiales" },
+  { id: 14, url: "https://i.ibb.co/PvLz39tx/20230626-115530.jpg", title: "Protección Climática", category: "Impermeabilizado" },
+  { id: 15, url: "https://i.ibb.co/gZPbY64g/FB-IMG-1675023474269.jpg", title: "Estética de Lujo", category: "Interior" },
+  { id: 16, url: "https://i.ibb.co/CK9kgwP3/20230331-092801.jpg", title: "Enduido Técnico", category: "Texturado" },
+  { id: 17, url: "https://i.ibb.co/jZZHQDdN/20221108-160428.jpg", title: "Fachada Renovada", category: "Exterior" },
+  { id: 18, url: "https://i.ibb.co/k2Trb9zw/20230605-071817.jpg", title: "Pintura de Altura", category: "Exterior" },
+  { id: 19, url: "https://i.ibb.co/G4ySTr9T/20221119-135750.jpg", title: "Resultado Final", category: "Exterior" },
+  { id: 20, url: "https://i.ibb.co/hJ3WL68W/20230314-105258.jpg", title: "Obra en Proceso", category: "Preparación" },
+  { id: 21, url: "https://i.ibb.co/9LtKW8M/20221108-110313.jpg", title: "Limpieza de Obra", category: "Preparación" },
+  { id: 22, url: "https://i.ibb.co/fVWsVQ67/20221119-135744.jpg", title: "Antes de Pintar", category: "Preparación" },
+  { id: 23, url: "https://i.ibb.co/BHn3xjLK/20230313-101329.jpg", title: "Preparación Técnica", category: "Preparación" },
+  { id: 24, url: "https://i.ibb.co/MDR0qhQ8/20221117-174053.jpg", title: "Acabado de Fachada", category: "Exterior" },
+  { id: 25, url: "https://i.ibb.co/S4ypw9SK/20221119-135822.jpg", title: "Detalle de Obra", category: "Exterior" },
+  { id: 26, url: "https://i.ibb.co/YThHjhRF/20221108-110244.jpg", title: "Pintura de Muros", category: "Interior" },
+  { id: 27, url: "https://i.ibb.co/KzSnkZzY/20221108-160522.jpg", title: "Terminación Profesional", category: "Interior" }
+];
+
+const categories = ["Todos", "Interior", "Exterior", "Texturado", "Impermeabilizado", "Preparación", "Especiales"];
+
+const beforeAfterData = [
+  {
+    id: 1,
+    title: "Renovación de Fachada",
+    before: "https://i.ibb.co/fVWsVQ67/20221119-135744.jpg",
+    after: "https://i.ibb.co/G4ySTr9T/20221119-135750.jpg",
+    desc: "Tratamiento de grietas y aplicación de impermeabilizante premium."
+  },
+  {
+    id: 2,
+    title: "Texturado Artesanal",
+    before: "https://i.ibb.co/cXvd41J0/20230331-092754.jpg",
+    after: "https://i.ibb.co/1f3Dh1Qg/20230331-092808.jpg",
+    desc: "Nivelación con enduido y acabado texturado de alta resistencia."
+  }
 ];
 
 const services = [
@@ -135,6 +154,40 @@ export default function App() {
   const [isHovering, setIsHovering] = useState(false);
   const [notification, setNotification] = useState<{ city: string, time: string } | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState("Todos");
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isResizing, setIsResizing] = useState(false);
+  const [calcData, setCalcData] = useState({ width: 0, height: 0, coats: 2 });
+  const [calcResult, setCalcResult] = useState<number | null>(null);
+  const [visualizerColor, setVisualizerColor] = useState("#3c6994");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeTimelineStep, setActiveTimelineStep] = useState(0);
+
+  const timelineSteps = [
+    { title: "Evaluación Técnica", desc: "Visita en obra para medir humedad y estado del sustrato.", icon: <Search size={20} /> },
+    { title: "Preparación", desc: "Sellado de grietas, lijado y aplicación de imprimante.", icon: <ShieldAlert size={20} /> },
+    { title: "Aplicación", desc: "Doble o triple capa de recubrimiento premium.", icon: <Paintbrush size={20} /> },
+    { title: "Auditoría Final", desc: "Control de calidad con micrómetro y entrega certificada.", icon: <CheckCircle2 size={20} /> }
+  ];
+
+  const visualizerColors = [
+    { name: "Azul Ekopia", hex: "#3c6994" },
+    { name: "Gris Urbano", hex: "#90A4AE" },
+    { name: "Arena Cálida", hex: "#D7CCC8" },
+    { name: "Verde Olivo", hex: "#5A5A40" },
+    { name: "Blanco Puro", hex: "#F5F5F5" },
+    { name: "Terracota", hex: "#A1887F" }
+  ];
+
+  const filteredImages = activeCategory === "Todos" 
+    ? galleryImages 
+    : galleryImages.filter(img => img.category === activeCategory);
+
+  const calculatePaint = () => {
+    const area = calcData.width * calcData.height;
+    const liters = (area / 10) * calcData.coats; // 10m2 per liter per coat
+    setCalcResult(Number(liters.toFixed(1)));
+  };
 
   useEffect(() => {
     const cities = ["Limpio", "Asunción", "Luque", "Mariano R. Alonso", "San Lorenzo", "Lambaré"];
@@ -163,7 +216,17 @@ export default function App() {
   const whatsappLink = `https://wa.me/595984921554`;
 
   return (
-    <div ref={containerRef} className="relative bg-[#f8f9fa] text-slate-900 selection:bg-[#3c6994]/30 cursor-none overflow-x-hidden">
+    <div ref={containerRef} className={`relative ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-[#f8f9fa] text-slate-900'} selection:bg-[#3c6994]/30 cursor-none overflow-x-hidden transition-colors duration-500`}>
+      {/* Dark Mode Toggle */}
+      <button 
+        onClick={() => setIsDarkMode(!isDarkMode)}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        className="fixed top-24 right-6 z-[100] w-12 h-12 rounded-full bg-white dark:bg-slate-800 border border-[#e9ecef] dark:border-slate-700 flex items-center justify-center shadow-xl text-[#3c6994] transition-all hover:scale-110"
+      >
+        {isDarkMode ? <Sparkles size={20} /> : <Zap size={20} />}
+      </button>
+
       {/* Custom Cursor */}
       <motion.div 
         className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#3c6994]/50 pointer-events-none z-[9999] hidden md:flex items-center justify-center"
@@ -218,10 +281,10 @@ export default function App() {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            {["Servicios", "Galería", "Nosotros", "Procesos", "Testimonios", "FAQ", "Presupuesto"].map((item) => (
+            {["Inicio", "Servicios", "Galería", "Visualizador", "Nosotros", "Procesos", "FAQ", "Presupuesto"].map((item) => (
               <a 
                 key={item}
-                href={`#${item.toLowerCase() === 'presupuesto' ? 'contacto' : item.toLowerCase() === 'galería' ? 'galeria' : item.toLowerCase()}`} 
+                href={`#${item.toLowerCase() === 'presupuesto' ? 'contacto' : item.toLowerCase() === 'galería' ? 'galeria' : item.toLowerCase() === 'inicio' ? 'inicio' : item.toLowerCase() === 'visualizador' ? 'visualizador' : item.toLowerCase()}`} 
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
                 className="text-xs uppercase tracking-wider font-bold text-slate-600 hover:text-[#3c6994] transition-colors"
@@ -267,7 +330,7 @@ export default function App() {
       </nav>
 
       {/* Hero Section - Professional Community Style */}
-      <section className="relative min-h-[80vh] flex items-center pt-32 pb-20 overflow-hidden bg-white border-b border-[#e9ecef]">
+      <section id="inicio" className={`relative min-h-[80vh] flex items-center pt-32 pb-20 overflow-hidden ${isDarkMode ? 'bg-slate-950' : 'bg-white'} border-b border-[#e9ecef]`}>
         <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-7">
@@ -508,6 +571,385 @@ Espero su respuesta, gracias!`;
         </div>
       </section>
 
+      {/* Before & After Section - Surprise Plugin 1 */}
+      <section className="py-32 relative bg-slate-50 overflow-hidden border-b border-[#e9ecef]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Transformación Real</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-8 leading-tight text-slate-900">
+                El Poder del <br />
+                <span className="text-[#3c6994]">Antes y Después.</span>
+              </h3>
+              <p className="text-slate-600 text-lg leading-relaxed mb-12 font-medium">
+                Desliza el cursor sobre la imagen para apreciar el cambio estructural y estético que logramos en cada intervención.
+              </p>
+              
+              <div className="space-y-8">
+                {beforeAfterData.map((item) => (
+                  <div key={item.id} className="p-6 bg-white rounded-xl border border-[#e9ecef] shadow-sm">
+                    <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
+                    <p className="text-sm text-slate-500">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative aspect-video rounded-2xl overflow-hidden border border-[#e9ecef] shadow-2xl group cursor-ew-resize"
+              onMouseMove={(e) => {
+                if (isResizing) {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  setSliderPosition(Math.max(0, Math.min(100, x)));
+                }
+              }}
+              onMouseDown={() => setIsResizing(true)}
+              onMouseUp={() => setIsResizing(false)}
+              onMouseLeave={() => setIsResizing(false)}
+            >
+              {/* After Image */}
+              <div className="absolute inset-0">
+                <img 
+                  src={beforeAfterData[0].after} 
+                  alt="After" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              
+              {/* Before Image (Clipped) */}
+              <div 
+                className="absolute inset-0 overflow-hidden"
+                style={{ width: `${sliderPosition}%` }}
+              >
+                <img 
+                  src={beforeAfterData[0].before} 
+                  alt="Before" 
+                  className="w-full h-full object-cover"
+                  style={{ width: `${100 / (sliderPosition / 100)}%` }}
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              {/* Slider Handle */}
+              <div 
+                className="absolute top-0 bottom-0 w-1 bg-white shadow-xl z-10"
+                style={{ left: `${sliderPosition}%` }}
+              >
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-2xl flex items-center justify-center text-[#3c6994]">
+                  <Scan size={20} />
+                </div>
+              </div>
+
+              {/* Labels */}
+              <div className="absolute bottom-6 left-6 px-3 py-1 bg-black/50 backdrop-blur-md rounded text-[10px] text-white font-bold uppercase tracking-widest pointer-events-none">Antes</div>
+              <div className="absolute bottom-6 right-6 px-3 py-1 bg-[#3c6994]/80 backdrop-blur-md rounded text-[10px] text-white font-bold uppercase tracking-widest pointer-events-none">Después</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Paint Calculator Section - Surprise Plugin 2 */}
+      <section id="calculadora" className={`py-32 relative ${isDarkMode ? 'bg-slate-900' : 'bg-white'} overflow-hidden border-b border-[#e9ecef]`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="grid lg:grid-cols-2">
+              <div className="p-12 lg:p-20 text-white">
+                <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Herramienta Técnica</h2>
+                <h3 className="font-sans text-4xl font-extrabold mb-8 leading-tight">
+                  Calculadora de <br />
+                  <span className="text-[#3c6994]">Insumos.</span>
+                </h3>
+                <p className="text-slate-400 text-lg leading-relaxed mb-12 font-medium">
+                  Estima la cantidad de pintura necesaria para tu proyecto. Basado en un rendimiento promedio de 10m² por litro.
+                </p>
+                
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase tracking-widest font-bold text-slate-500">Ancho (m)</label>
+                      <input 
+                        type="number" 
+                        onChange={(e) => setCalcData({...calcData, width: Number(e.target.value)})}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors text-white font-medium"
+                        placeholder="0.00"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase tracking-widest font-bold text-slate-500">Alto (m)</label>
+                      <input 
+                        type="number" 
+                        onChange={(e) => setCalcData({...calcData, height: Number(e.target.value)})}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors text-white font-medium"
+                        placeholder="0.00"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-slate-500">Manos de Pintura</label>
+                    <select 
+                      defaultValue="2"
+                      onChange={(e) => setCalcData({...calcData, coats: Number(e.target.value)})}
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors text-white font-medium appearance-none"
+                    >
+                      <option value="1" className="bg-slate-900">1 Mano (Refresco)</option>
+                      <option value="2" className="bg-slate-900">2 Manos (Estándar)</option>
+                      <option value="3" className="bg-slate-900">3 Manos (Cambio de color)</option>
+                    </select>
+                  </div>
+                  <button 
+                    onClick={calculatePaint}
+                    className="w-full bg-[#3c6994] text-white py-5 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-[#2d4f70] transition-all"
+                  >
+                    Calcular Litros
+                  </button>
+                </div>
+              </div>
+              
+              <div className="bg-[#3c6994]/10 flex items-center justify-center p-12 lg:p-20 border-l border-white/5">
+                <div className="text-center">
+                  <div className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Resultado Estimado</div>
+                  <div className="text-8xl md:text-9xl font-black text-white mb-4">
+                    {calcResult !== null ? calcResult : "0"}
+                  </div>
+                  <div className="text-2xl font-bold text-slate-400 uppercase tracking-widest">Litros de Pintura</div>
+                  <p className="mt-8 text-slate-500 text-xs max-w-xs mx-auto italic">
+                    * El cálculo es aproximado y puede variar según la porosidad de la superficie y la marca de pintura.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Virtual Room Visualizer - Surprise Plugin 5 */}
+      <section id="visualizador" className={`py-32 relative ${isDarkMode ? 'bg-slate-950' : 'bg-[#f8f9fa]'} overflow-hidden border-b border-[#e9ecef]`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div className="order-2 lg:order-1">
+              <div className="relative aspect-square rounded-2xl overflow-hidden border border-[#e9ecef] shadow-2xl bg-white">
+                {/* Simulated Room Image with Color Overlay */}
+                <img 
+                  src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200" 
+                  alt="Room Visualizer" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div 
+                  className="absolute inset-0 mix-blend-multiply opacity-60 transition-colors duration-700"
+                  style={{ backgroundColor: visualizerColor }}
+                />
+                <div className="absolute top-8 left-8 px-4 py-2 bg-white/90 backdrop-blur-md rounded-lg border border-[#e9ecef] shadow-lg">
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994] mb-1">Color Seleccionado</div>
+                  <div className="text-sm font-bold text-slate-900">{visualizerColors.find(c => c.hex === visualizerColor)?.name}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Innovación Visual</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-8 leading-tight text-slate-900 dark:text-white">
+                Visualizador de <br />
+                <span className="text-[#3c6994]">Ambientes.</span>
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-12 font-medium">
+                Experimenta con nuestra selección de colores premium y visualiza cómo transformarían tu espacio antes de aplicar la primera gota.
+              </p>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {visualizerColors.map((color) => (
+                  <button
+                    key={color.hex}
+                    onClick={() => setVisualizerColor(color.hex)}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    className={`p-4 rounded-xl border transition-all flex flex-col items-center gap-3 ${
+                      visualizerColor === color.hex 
+                        ? "border-[#3c6994] bg-[#3c6994]/5 shadow-lg" 
+                        : "border-[#e9ecef] bg-white hover:border-[#3c6994]/30"
+                    }`}
+                  >
+                    <div 
+                      className="w-12 h-12 rounded-full shadow-inner border border-black/5"
+                      style={{ backgroundColor: color.hex }}
+                    />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-600">{color.name}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-12 p-6 rounded-xl bg-[#3c6994]/10 border border-[#3c6994]/20 flex items-center gap-4">
+                <Sparkles className="text-[#3c6994] shrink-0" />
+                <p className="text-xs text-[#3c6994] font-bold uppercase tracking-widest leading-relaxed">
+                  ¿Te gusta este color? Podemos preparar la muestra exacta para tu obra.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Timeline Section - Surprise Plugin 6 */}
+      <section id="linea-tiempo" className={`py-32 relative ${isDarkMode ? 'bg-slate-900' : 'bg-white'} overflow-hidden border-b border-[#e9ecef]`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Nuestro Método</h2>
+            <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold text-slate-900 dark:text-white">Cronograma de Obra.</h3>
+          </div>
+
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute top-1/2 left-0 w-full h-1 bg-[#e9ecef] -translate-y-1/2 hidden lg:block" />
+            
+            <div className="grid lg:grid-cols-4 gap-12 relative z-10">
+              {timelineSteps.map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  onClick={() => setActiveTimelineStep(i)}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  className={`p-8 rounded-2xl border transition-all cursor-pointer ${
+                    activeTimelineStep === i 
+                      ? "bg-[#3c6994] text-white border-[#3c6994] shadow-2xl scale-105" 
+                      : "bg-white border-[#e9ecef] text-slate-900 hover:border-[#3c6994]/30"
+                  }`}
+                >
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 ${
+                    activeTimelineStep === i ? "bg-white text-[#3c6994]" : "bg-[#3c6994]/10 text-[#3c6994]"
+                  }`}>
+                    {step.icon}
+                  </div>
+                  <h4 className="text-xl font-bold mb-4">{step.title}</h4>
+                  <p className={`text-sm leading-relaxed font-medium ${
+                    activeTimelineStep === i ? "text-white/80" : "text-slate-500"
+                  }`}>
+                    {step.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Status Tracker - Surprise Plugin 7 */}
+      <section id="estado-obra" className={`py-32 relative ${isDarkMode ? 'bg-slate-950' : 'bg-white'} overflow-hidden border-b border-[#e9ecef]`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-[#e9ecef] dark:border-slate-800 overflow-hidden shadow-2xl">
+            <div className="p-12 lg:p-20">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
+                <div>
+                  <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-4">Seguimiento en Vivo</h2>
+                  <h3 className="font-sans text-3xl font-extrabold text-slate-900 dark:text-white">Estado de Proyectos Activos.</h3>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-2 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] uppercase tracking-widest font-bold text-emerald-500">3 Obras en Curso</span>
+                </div>
+              </div>
+
+              <div className="space-y-12">
+                {[
+                  { id: "EK-2024-08", location: "Barrio Cerrado, Luque", service: "Texturado & Pintura", progress: 85, status: "Fase de Terminación" },
+                  { id: "EK-2024-09", location: "Edificio Corporativo, Asunción", service: "Impermeabilizado", progress: 40, status: "Aplicación de Base" },
+                  { id: "EK-2024-10", location: "Residencia Particular, Limpio", service: "Pintura Interior", progress: 15, status: "Preparación de Superficie" }
+                ].map((project, i) => (
+                  <div key={i} className="group">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994] mb-1">{project.id}</div>
+                        <div className="text-lg font-bold text-slate-900 dark:text-white">{project.location}</div>
+                        <div className="text-xs text-slate-500 font-medium">{project.service}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-black text-[#3c6994]">{project.progress}%</div>
+                        <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">{project.status}</div>
+                      </div>
+                    </div>
+                    <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${project.progress}%` }}
+                        transition={{ duration: 1.5, ease: "easeOut" }}
+                        className="h-full bg-[#3c6994]"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technical Documentation Download - Surprise Plugin 8 */}
+      <section className={`py-32 relative ${isDarkMode ? 'bg-slate-900' : 'bg-slate-50'} overflow-hidden`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
+            <div>
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-8">Recursos Técnicos</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold mb-8 leading-tight text-slate-900 dark:text-white">
+                Documentación <br />
+                <span className="text-[#3c6994]">Certificada.</span>
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-12 font-medium">
+                Descarga nuestras fichas técnicas y protocolos de aplicación para conocer a fondo el estándar de calidad que aplicamos en cada obra.
+              </p>
+              
+              <div className="grid sm:grid-cols-2 gap-6">
+                {[
+                  { title: "Protocolo QA", size: "1.2 MB", icon: <ClipboardCheck size={20} /> },
+                  { title: "Ficha Texturados", size: "2.4 MB", icon: <Layers size={20} /> },
+                  { title: "Guía de Mantenimiento", size: "0.8 MB", icon: <HelpCircle size={20} /> },
+                  { title: "Catálogo 2024", size: "5.1 MB", icon: <Sparkles size={20} /> }
+                ].map((doc, i) => (
+                  <button
+                    key={i}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                    onClick={() => alert(`Iniciando descarga de: ${doc.title}`)}
+                    className="flex items-center gap-4 p-6 bg-white dark:bg-slate-800 rounded-xl border border-[#e9ecef] dark:border-slate-700 hover:border-[#3c6994] transition-all group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-[#3c6994]/10 flex items-center justify-center text-[#3c6994] group-hover:bg-[#3c6994] group-hover:text-white transition-all">
+                      {doc.icon}
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-bold text-slate-900 dark:text-white">{doc.title}</div>
+                      <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">{doc.size}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="aspect-[4/3] bg-slate-900 rounded-2xl overflow-hidden shadow-2xl relative group">
+                <img 
+                  src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=1200" 
+                  alt="Documentation" 
+                  className="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center text-[#3c6994] shadow-2xl animate-bounce">
+                    <ArrowUp size={40} className="rotate-180" />
+                  </div>
+                </div>
+                <div className="absolute bottom-8 left-8 right-8 text-center">
+                  <div className="text-[10px] uppercase tracking-[0.5em] font-bold text-white/60 mb-2">Descarga Directa</div>
+                  <div className="text-xl font-bold text-white">Kit de Transparencia Técnica</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services - Bento Grid Style */}
       <section id="servicios" className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -686,6 +1128,73 @@ Espero su respuesta, gracias!`;
           </div>
         )}
 
+      {/* Color Palette Section - Surprise Plugin 4 */}
+      <section className="py-32 relative bg-[#f8f9fa] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+            <div className="max-w-2xl">
+              <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Inspiración Cromática</h2>
+              <h3 className="font-sans text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-none tracking-tight text-slate-900">
+                Paletas de <br />
+                <span className="text-[#3c6994]">Tendencia.</span>
+              </h3>
+            </div>
+            <p className="text-slate-500 max-w-xs text-sm leading-relaxed font-medium">
+              Combinaciones diseñadas para crear atmósferas únicas en cada ambiente de tu hogar.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Serenidad Nórdica",
+                colors: ["#F5F5F5", "#E0E0E0", "#3c6994", "#2D4F70"],
+                desc: "Ideal para salas y dormitorios que buscan amplitud y calma."
+              },
+              {
+                name: "Tierra Profunda",
+                colors: ["#D7CCC8", "#A1887F", "#5D4037", "#3E2723"],
+                desc: "Perfecto para fachadas y espacios con mucha luz natural."
+              },
+              {
+                name: "Elegancia Urbana",
+                colors: ["#CFD8DC", "#90A4AE", "#455A64", "#263238"],
+                desc: "Sofisticación para oficinas y espacios comerciales modernos."
+              }
+            ].map((palette, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white p-8 rounded-2xl border border-[#e9ecef] shadow-sm hover:shadow-xl transition-all duration-500"
+              >
+                <div className="flex h-32 rounded-xl overflow-hidden mb-8">
+                  {palette.colors.map((color, j) => (
+                    <div 
+                      key={j} 
+                      className="flex-1 hover:flex-[1.5] transition-all duration-500 cursor-pointer group relative"
+                      style={{ backgroundColor: color }}
+                      onMouseEnter={() => setIsHovering(true)}
+                      onMouseLeave={() => setIsHovering(false)}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-[8px] font-mono font-bold bg-white/90 px-2 py-1 rounded shadow-sm">{color}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <h4 className="text-xl font-bold mb-4 text-slate-900">{palette.name}</h4>
+                <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                  {palette.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Technical Breakdown Section */}
       <section className="py-32 relative bg-white border-y border-[#e9ecef] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
@@ -737,47 +1246,67 @@ Espero su respuesta, gracias!`;
       {/* Full Gallery Section */}
       <section id="galeria" className="py-32 relative bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-24">
+          <div className="text-center mb-16">
             <h2 className="text-[10px] uppercase tracking-[0.5em] font-bold text-[#3c6994] mb-6">Portafolio de Excelencia</h2>
             <h3 className="font-sans text-[clamp(2rem,5vw,4rem)] font-extrabold leading-tight tracking-tight text-slate-900">
               Nuestros Trabajos en <span className="text-[#3c6994]">Acabados Finos.</span>
             </h3>
-            <p className="mt-6 text-slate-500 max-w-xl mx-auto text-sm font-medium">
-              Haz clic en cualquier imagen para abrir el visor de detalle y apreciar la calidad de terminación original.
-            </p>
           </div>
 
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-            {galleryImages.map((image, i) => (
-              <motion.div
-                key={image.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: (i % 4) * 0.05 }}
-                viewport={{ once: true }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-                onClick={() => setSelectedImageIndex(i)}
-                className="relative group overflow-hidden rounded-xl border border-[#e9ecef] bg-white break-inside-avoid shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer"
+          {/* Category Filter - Surprise Plugin 3 */}
+          <div className="flex flex-wrap justify-center gap-2 mb-16">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all border ${
+                  activeCategory === cat 
+                    ? "bg-[#3c6994] text-white border-[#3c6994] shadow-lg shadow-[#3c6994]/20" 
+                    : "bg-white text-slate-400 border-[#e9ecef] hover:border-[#3c6994] hover:text-[#3c6994]"
+                }`}
               >
-                <img 
-                  src={image.url} 
-                  alt={image.title} 
-                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                  <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994] mb-2">Proyecto Realizado</div>
-                  <h4 className="text-white font-bold text-lg">{image.title}</h4>
-                  <div className="mt-4 flex items-center gap-2 text-white/70 text-[10px] uppercase tracking-widest font-bold">
-                    <Maximize2 size={12} />
-                    Ver Detalle
-                  </div>
-                </div>
-              </motion.div>
+                {cat}
+              </button>
             ))}
           </div>
+
+          <motion.div 
+            layout
+            className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredImages.map((image, i) => (
+                <motion.div
+                  key={image.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                  onClick={() => setSelectedImageIndex(galleryImages.findIndex(img => img.id === image.id))}
+                  className="relative group overflow-hidden rounded-xl border border-[#e9ecef] bg-white break-inside-avoid shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer"
+                >
+                  <img 
+                    src={image.url} 
+                    alt={image.title} 
+                    className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-[#3c6994] mb-2">{image.category}</div>
+                    <h4 className="text-white font-bold text-lg">{image.title}</h4>
+                    <div className="mt-4 flex items-center gap-2 text-white/70 text-[10px] uppercase tracking-widest font-bold">
+                      <Maximize2 size={12} />
+                      Ver Detalle
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </section>
 
@@ -1433,7 +1962,7 @@ Espero su respuesta, gracias!`;
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-[#e9ecef]">
             <div className="text-[10px] uppercase tracking-widest font-bold text-slate-300">
-              © 2024 Ekopia — Fabián Paul Sanabria
+              © 2024 Ekopia — Fabián Paul Sanabria | Auditado & Optimizado v2.0
             </div>
             <div className="flex gap-8 text-[10px] uppercase tracking-widest font-bold text-slate-300">
               <a href="#" className="hover:text-[#3c6994] transition-colors">Privacidad</a>
