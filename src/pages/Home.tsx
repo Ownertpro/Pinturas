@@ -70,7 +70,7 @@ const Home: React.FC<HomeProps> = ({ isDarkMode, setIsHovering }) => {
               
               {/* Floating Stats */}
               <div className="absolute -bottom-10 -left-10 bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-2xl border border-[#e9ecef] dark:border-slate-800 hidden md:block">
-                <div className="text-4xl font-black text-[#3c6994] mb-1">10+</div>
+                <div className="text-4xl font-black text-[#3c6994] mb-1">15+</div>
                 <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Años de Experiencia</div>
               </div>
             </div>

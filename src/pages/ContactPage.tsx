@@ -57,19 +57,36 @@ const ContactPage: React.FC<ContactPageProps> = ({ isDarkMode, setIsHovering }) 
 
           <div className={`p-12 rounded-3xl border ${isDarkMode ? 'bg-slate-900 border-slate-800' : 'bg-[#f8f9fa] border-[#e9ecef]'}`}>
             <h3 className={`text-2xl font-bold mb-8 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Solicitar Presupuesto</h3>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form 
+              className="space-y-6" 
+              onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const name = formData.get('name');
+                const service = formData.get('service');
+                const message = formData.get('message');
+                
+                const text = `Hola Ekopia! Mi nombre es ${name}. Me interesa el servicio de ${service}. Detalles: ${message}`;
+                window.open(`https://wa.me/595984921554?text=${encodeURIComponent(text)}`, '_blank');
+              }}
+            >
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Nombre Completo</label>
                   <input 
+                    name="name"
                     type="text" 
+                    required
                     placeholder="Tu nombre..."
                     className={`w-full border rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors font-medium ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-[#e9ecef] text-slate-900'}`}
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Servicio</label>
-                  <select className={`w-full border rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors font-medium ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-[#e9ecef] text-slate-900'}`}>
+                  <select 
+                    name="service"
+                    className={`w-full border rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors font-medium ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-[#e9ecef] text-slate-900'}`}
+                  >
                     <option>Pintura Interior/Exterior</option>
                     <option>Texturado & Enduido</option>
                     <option>Impermeabilizado</option>
@@ -81,13 +98,20 @@ const ContactPage: React.FC<ContactPageProps> = ({ isDarkMode, setIsHovering }) 
               <div className="space-y-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Mensaje / Detalles de la Obra</label>
                 <textarea 
+                  name="message"
+                  required
                   rows={4}
                   placeholder="Cuéntanos sobre tu proyecto..."
                   className={`w-full border rounded-lg px-6 py-4 focus:outline-none focus:border-[#3c6994] transition-colors font-medium ${isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-[#e9ecef] text-slate-900'}`}
                 />
               </div>
 
-              <button className="w-full bg-[#3c6994] text-white py-5 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-[#2d4f70] transition-all flex items-center justify-center gap-3 shadow-xl">
+              <button 
+                type="submit"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                className="w-full bg-[#3c6994] text-white py-5 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-[#2d4f70] transition-all flex items-center justify-center gap-3 shadow-xl"
+              >
                 Enviar Solicitud <Send size={16} />
               </button>
             </form>

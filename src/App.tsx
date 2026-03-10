@@ -56,7 +56,7 @@ const AppContent = () => {
   }, []);
 
   return (
-    <div className={`relative min-h-screen transition-colors duration-500 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-[#f8f9fa] text-slate-900'} selection:bg-[#3c6994]/30 cursor-none overflow-x-hidden`}>
+    <div className={`relative min-h-screen transition-colors duration-500 ${isDarkMode ? 'bg-slate-950 text-white' : 'bg-[#f8f9fa] text-slate-900'} selection:bg-[#3c6994]/30 md:cursor-none overflow-x-hidden`}>
       <ScrollToTop />
       
       {/* Custom Cursor */}
